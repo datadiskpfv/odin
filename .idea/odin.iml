@@ -3,36 +3,6 @@
   <component name="ModuleRunConfigurationManager">
     <shared />
     <local>
-      <configuration default="false" name="bs1" type="RubyRunConfigurationType" factoryName="Ruby" temporary="true">
-        <module name="odin" />
-        <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
-        <RUBY_RUN_CONFIG NAME="WORK DIR" VALUE="$MODULE_DIR$/bubble_sort" />
-        <RUBY_RUN_CONFIG NAME="SHOULD_USE_SDK" VALUE="false" />
-        <RUBY_RUN_CONFIG NAME="ALTERN_SDK_NAME" VALUE="" />
-        <RUBY_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
-        <envs />
-        <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
-        <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
-        <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov" />
-        <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$MODULE_DIR$/bubble_sort/bs1.rb" />
-        <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
-        <method />
-      </configuration>
-      <configuration default="false" name="em" type="RubyRunConfigurationType" factoryName="Ruby" temporary="true">
-        <module name="odin" />
-        <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
-        <RUBY_RUN_CONFIG NAME="WORK DIR" VALUE="$MODULE_DIR$/e_methods" />
-        <RUBY_RUN_CONFIG NAME="SHOULD_USE_SDK" VALUE="false" />
-        <RUBY_RUN_CONFIG NAME="ALTERN_SDK_NAME" VALUE="" />
-        <RUBY_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
-        <envs />
-        <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
-        <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
-        <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov" />
-        <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$MODULE_DIR$/e_methods/em.rb" />
-        <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
-        <method />
-      </configuration>
       <configuration default="false" name="test2" type="RubyRunConfigurationType" factoryName="Ruby" temporary="true">
         <module name="odin" />
         <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
@@ -75,6 +45,36 @@
         <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
         <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov" />
         <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$MODULE_DIR$/tictactoe/test.rb" />
+        <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
+        <method />
+      </configuration>
+      <configuration default="false" name="test (1)" type="RubyRunConfigurationType" factoryName="Ruby" temporary="true">
+        <module name="odin" />
+        <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+        <RUBY_RUN_CONFIG NAME="WORK DIR" VALUE="$MODULE_DIR$/mastermind" />
+        <RUBY_RUN_CONFIG NAME="SHOULD_USE_SDK" VALUE="false" />
+        <RUBY_RUN_CONFIG NAME="ALTERN_SDK_NAME" VALUE="" />
+        <RUBY_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
+        <envs />
+        <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+        <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
+        <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov" />
+        <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$MODULE_DIR$/mastermind/test.rb" />
+        <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
+        <method />
+      </configuration>
+      <configuration default="false" name="mastermind" type="RubyRunConfigurationType" factoryName="Ruby" temporary="true">
+        <module name="odin" />
+        <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+        <RUBY_RUN_CONFIG NAME="WORK DIR" VALUE="$MODULE_DIR$/mastermind" />
+        <RUBY_RUN_CONFIG NAME="SHOULD_USE_SDK" VALUE="false" />
+        <RUBY_RUN_CONFIG NAME="ALTERN_SDK_NAME" VALUE="" />
+        <RUBY_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
+        <envs />
+        <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+        <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
+        <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov" />
+        <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$MODULE_DIR$/mastermind/mastermind.rb" />
         <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
         <method />
       </configuration>
