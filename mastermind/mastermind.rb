@@ -1,6 +1,7 @@
 class Game
 
   def initialize
+    ## use for testing
     #@answer = %w( R B G R )
 
     ## generate the mastermind answer
@@ -23,11 +24,13 @@ class Game
 
   def check_winner(guess)
 
+    ## check straight away, you never know
     if guess == @answer
       @feedback = 'XXXX'
       return true
     end
 
+    ## lets loop around the guess and change the feedback
     guess.each_with_index do |g, i|
       if g == @answer[i]
         @feedback[i] = 'X'
