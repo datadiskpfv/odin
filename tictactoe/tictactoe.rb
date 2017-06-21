@@ -1,51 +1,52 @@
-class Board
+class Game
+
+  WINNING_COMBINATIONS = [[0, 1, 2], [3, 4, 5], [6, 7, 8], #Horizontal
+                          [0, 3, 6], [1, 4, 7], [2, 5, 8], #Vertical
+                          [0, 4, 8], [2, 4, 6]] #Diagonal
 
   def initialize
-    @grid = Array.new(3) { Array.new(3, " ") }
+    @board = Array.new(8)
   end
 
   def display
+    ## clear the screen
+    puts "\e[H\e[2J"
 
-    char = 65
-
-    puts "     1 |  2 |  3 "
-    @grid.each_with_index do |row, index|
-
-      puts "       |    |   "
-      puts "#{(char).chr}   #{row[0]}  | #{row[1]}  | #{row[2] }  "
-      puts "       |    |   "
-
-      char += 1
-
-      if index < 2
-        puts "    -------------"
-      end
-    end
+    puts "    A  |   B  |   C  "
+    puts "1   #{@board[0]}   |   #{@board[1]}   |  #{@board[2]}   "
+    puts "---------------------"
+    puts "2   #{@board[3]}   |   #{@board[4]}   |  #{@board[5]} "
+    puts "---------------------"
+    puts "3   #{@board[6]}   |   #{@board[7]}   |  #{@board[8]} "
   end
 
   def add_move(square, player)
-    puts "Making a move"
 
-    case (square[0].to_s)
-      when 'A'
-        index = 0;
-      when 'B'
-        index = 1;
-      when 'C'
-        index = 2
+    case (square)
+      when 'A1' then index = 0
+      when 'B1' then index = 1
+      when 'C1' then index = 2
+      when 'A2' then index = 3
+      when 'B2' then index = 4
+      when 'C2' then index = 5
+      when 'A3' then index = 6
+      when 'B3' then index = 7
+      when 'C3' then index = 8
     end
 
-    if ['X', 'O'].include? @grid[index][square[1].to_i - 1]
-      puts "That square #{square} has already been taken, try again"
-      return 1
+    ## make sure the square has not been used
+    if @board[index].nil?
+      @board[index] = player
+      return false
     else
-      @grid[index][square[1].to_i - 1] = player
+      return true
     end
-
-
   end
 
-  def check_winner
+  def check_winner(player)
+    if WINNING_COMBINATIONS.any? { |line| line.all? { |square| @board[square] == player } }
+      return true
+    end
   end
 end
 
@@ -58,9 +59,6 @@ while true
   square = ''
   play = true
 
-  ## clear the screen
-  #puts "\e[H\e[2J"
-
   ## loop until we get the correct response from the user
   until ['Y', 'N', 'y', 'n'].include? r1 do
     printf("Do you want to play TicTacToe [y|n]: ")
@@ -72,13 +70,20 @@ while true
     end
   end
 
-  board = Board.new
-  board.display
+  ## setup the game
+  game = Game.new
 
+  ## display the game
+  game.display
+
+  ## keep looping until someone wins or its a draw
   while play
     puts
 
+    ## we check for bad input and if the square has already been used
     bad_input = true
+    square_taken = true
+    r3 = false
     while bad_input
       printf("Player #{player}, select a square A1-C3: ")
       square = gets.chomp.to_s
@@ -88,27 +93,34 @@ while true
       else
         puts "Wrong data entered"
       end
+
+      if game.add_move(square, player)
+        puts "That square #{square} has already been taken, try again"
+        bad_input = true
+      end
     end
 
-    board.add_move(square, player)
-    board.display
+    ## all looks good so display the updated game
+    game.display
 
-
-    ## if no one has won by this point its a draw
-    if turns == 9
-      puts "its a DRAW!!!!!"
+    ## check for a winner or if its a draw, otherwise repeat the loop
+    if game.check_winner(player)
+      puts "Player #{player} has WON !!!!!"
       play = false
-      turns = 0
-    else
-      turns += 1
-    end
-
-    ## switch the player
-    if player == 'X'
+      turns = 1
       player = 'O'
     else
-      player = 'X'
+      ## if no one has won by this point its a draw
+      if turns == 9
+        puts "its a DRAW!!!!!"
+        play = false
+        turns = 1
+        player = 'O'
+      else
+        ## switch the player
+        player = player == 'X' ? 'O' : 'X'
+        turns += 1
+      end
     end
   end
-
 end
