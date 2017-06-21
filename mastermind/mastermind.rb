@@ -32,10 +32,12 @@ class Game
 
     ## lets loop around the guess and change the feedback
     guess.each_with_index do |g, i|
+      ## start with the correct color in the correct position
       if g == @answer[i]
         @feedback[i] = 'X'
       end
 
+      ## check that color is correct but in wrong position
       if (@answer.include? g) && (@feedback[i] != 'X')
           @feedback[i] = 'O'
       end
@@ -49,6 +51,7 @@ class Game
 
 end
 
+## the colurs that are used Red, Blue, Green and Yellow
 MASTERMIND_COLORS = ['R', 'B', 'G', 'Y']
 
 play = true
@@ -61,7 +64,7 @@ while play
   ## lets make sure the user input is correct
   check_input = true
   while check_input
-    puts "What is your Guess (use only RBGY): "
+    puts "What is your Guess (use only R,B,G,Y values): "
     guess = gets.chomp.split('')
 
     # lets make sure the user enters only RGBY combinations
