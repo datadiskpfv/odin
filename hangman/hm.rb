@@ -17,6 +17,8 @@ class Game
     @feedback = Array.new(@answer.length, '-')
   end
 
+  ## this will randomly select a word from 5desk.txt file
+  ## thats between 5 and 12 characters
   def generate_answer
     file = File.open("5desk.txt", 'r')
 
@@ -29,7 +31,7 @@ class Game
     return words.sample.downcase.chomp
   end
 
-  ## bad_choice will draw the hangman into the array
+  ## bad_choice will draw the hangman into the @hangman_array
   def bad_choice(count)
     case (count)
       when 1
@@ -66,7 +68,7 @@ class Game
     ## clear the screen
     puts "\e[H\e[2J"
 
-    # show the multi-array
+    # show the hangman multi-array
     @hangman_array.each do |row|
       puts row.join('')
     end
@@ -126,7 +128,7 @@ class Game
 
 end
 
-## This class converts the game attributes to a an game json object
+## This class converts the game attributes to an game json object
 ## which can then be loaded from and to a file
 class Game_json
   attr_accessor :hangman_array, :turns, :feedback, :guessed_letters, :answer
@@ -149,10 +151,8 @@ class Game_json
     })
   end
 
-  def self.from_json(string)
-    data = JSON.load string
-  #  p data
-  #  self.new(data['name'], data['age'], data['gender'])
+  def self.from_json(game_json_object)
+    data = JSON.load game_json_object
   end
 end
 
@@ -179,15 +179,12 @@ while play
     puts 'What is your Guess (a-z) or 0 to save/quit or 1 to load previous game: '
     guess = gets.chomp
 
-
-    # lets make sure the user enters only a single letter a-z
+    # lets make sure the user enters only a single letter a-z or 0 to save or 1 to load a previous game
     if (guess !~ /^[a-z,0,1]$/)
         puts "You must enter only single letter a-z"
     elsif (guess == '0') || (guess == '1')
-      #puts "you have chosen to save or load a game"
       if guess == '0'
         game.save_game
-        #game.display
       else
         if game.load_game
           puts "you have loaded the previous game"
