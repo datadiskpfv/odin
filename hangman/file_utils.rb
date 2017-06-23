@@ -17,11 +17,11 @@ module FILE_UTILS
 
   def check_file
     if File.exists?("game_save.json")
-      puts "FILE_UTIL: you have loaded the previous game"
+      puts "FILE_UTIL: A previous game file exists"
+      return true
     else
       puts "FILE_UTIL: You dont have a saved game"
       return false
     end
-    return true
   end
 end

@@ -22,7 +22,7 @@ class Game
 
     words = []
     file.each do |l|
-      if (l.length >= 5) && (l.length <=12)
+      if (l.length >= 6) && (l.length <=12)
         words.push(l)
       end
     end
@@ -100,23 +100,34 @@ class Game
   end
 
   def save_game
+    ## create a game json object that will be saved to a file
     save = Game_json.new @hangman_array, $turns, @feedback, $guessed_letters, @answer
-    p save.to_json
+    #p save.to_json
     save_file(save)
   end
 
   def load_game
-    game_json_object = Game_json.from_json(load_file)
-    puts game_json_object
-    @hangman_array = game_json_object['hangman_array']
-    $turns = game_json_object['turns']
-    @feedback = game_json_object['feedback']
-    $guessed_letters = game_json_object['guessed_letters']
-    @answer = game_json_object['answer']
+    ## we first check a previous game file exists, if it does load it into
+    ## a game json object and then set the game attributes using the game json object
+    if check_file
+      game_json_object = Game_json.from_json(load_file)
+      puts game_json_object
+      @hangman_array = game_json_object['hangman_array']
+      $turns = game_json_object['turns']
+      @feedback = game_json_object['feedback']
+      $guessed_letters = game_json_object['guessed_letters']
+      @answer = game_json_object['answer']
+      puts "Previous game loaded"
+      return true
+    else
+      return false
+    end
   end
 
 end
 
+## This class converts the game attributes to a an game json object
+## which can then be loaded from and to a file
 class Game_json
   attr_accessor :hangman_array, :turns, :feedback, :guessed_letters, :answer
 
@@ -173,16 +184,14 @@ while play
     if (guess !~ /^[a-z,0,1]$/)
         puts "You must enter only single letter a-z"
     elsif (guess == '0') || (guess == '1')
-      puts "you have chosen to save or load a game"
+      #puts "you have chosen to save or load a game"
       if guess == '0'
         game.save_game
-        game.display
+        #game.display
       else
         if game.load_game
           puts "you have loaded the previous game"
           game.display
-        else
-          puts "You dont have a saved game"
         end
       end
     else
