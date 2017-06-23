@@ -33,24 +33,19 @@ class Game
   ## bad_choice will draw the hangman into the @hangman_array
   def bad_choice(count)
     case (count)
-      when 1
-          @hangman_array[7][0] = '-' * 6
+      when 1 then @hangman_array[7][0] = '-' * 6
       when 2
         6.times do |i|
           @hangman_array[i+1][0] = '|'
         end
-      when 3
-          @hangman_array[0][0] = '-' * 6
-      when 4
-        @hangman_array[1][5] = '|'
-      when 5
-        @hangman_array[2][5] = 'O'
+      when 3 then @hangman_array[0][0] = '-' * 6
+      when 4 then @hangman_array[1][5] = '|'
+      when 5 then @hangman_array[2][5] = 'O'
       when 6
         @hangman_array[3][4] = '/'
         @hangman_array[3][5] = '|'
         @hangman_array[3][6] = '\\'
-      when 7
-        @hangman_array[4][5] = '|'
+      when 7 then@hangman_array[4][5] = '|'
       when 8
         @hangman_array[5][4] = '/'
         @hangman_array[5][6] = '\\'
@@ -164,26 +159,29 @@ $guessed_letters = []
 
 play = true
 game = Game.new
-while play
+while play && ($turns != 8)
 
   game.display
 
   ## lets make sure the user input is correct
   check_input = true
   while check_input
-    puts 'What is your Guess (a-z) or 0 to save/quit or 1 to load previous game: '
+    puts 'What is your Guess (a-z) or 0 to save/quit, 1 to load previous game, Q to quit: '
     guess = gets.chomp
 
     # lets make sure the user enters only a single letter a-z or 0 to save or 1 to load a previous game
-    if guess !~ /^[a-z,0,1]$/
+    if guess !~ /^[a-z,0,1,Q]$/
         puts 'You must enter only single letter a-z'
     elsif guess == '0'
       game.save_game
-    elsif guess == 1
+    elsif guess == '1'
         if game.load_game
           puts 'you have loaded the previous game'
           game.display
         end
+    elsif guess == 'Q'
+      puts "Thanks for playing"
+      exit 0
     else
       ## lets see if the letter has already been chosen
       if $guessed_letters.include? guess
@@ -200,17 +198,12 @@ while play
 
     if game.get_answer == game.get_feedback
       puts 'You have won!!!!!'
-      play = false
       game = Game.new
     end
   else
     $turns += 1
     game.bad_choice($turns)
-
-    if $turns == 8
-      puts 'Bad luck you lost, better luck next time'
-      exit 0
-    end
   end
-
 end
+
+puts 'Bad luck you lost, better luck next time'
