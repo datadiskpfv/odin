@@ -20,10 +20,9 @@ class Game
   ## this will randomly select a word from 5desk.txt file
   ## thats between 5 and 12 characters
   def generate_answer
-    file = File.open('5desk.txt', 'r')
 
     words = []
-    file.each do |l|
+    File.open('5desk.txt', 'r').each do |l|
       if (l.length >= 6) && (l.length <=12)
         words.push(l)
       end
@@ -35,17 +34,13 @@ class Game
   def bad_choice(count)
     case (count)
       when 1
-        6.times do |i|
-          @hangman_array[7][i] = '-'
-        end
+          @hangman_array[7][0] = '-' * 6
       when 2
         6.times do |i|
-          @hangman_array[i + 1][0] = '|'
+          @hangman_array[i+1][0] = '|'
         end
       when 3
-        6.times do |i|
-          @hangman_array[0][i] = '-'
-        end
+          @hangman_array[0][0] = '-' * 6
       when 4
         @hangman_array[1][5] = '|'
       when 5
@@ -182,15 +177,13 @@ while play
     # lets make sure the user enters only a single letter a-z or 0 to save or 1 to load a previous game
     if guess !~ /^[a-z,0,1]$/
         puts 'You must enter only single letter a-z'
-    elsif (guess == '0') || (guess == '1')
-      if guess == '0'
-        game.save_game
-      else
+    elsif guess == '0'
+      game.save_game
+    elsif guess == 1
         if game.load_game
           puts 'you have loaded the previous game'
           game.display
         end
-      end
     else
       ## lets see if the letter has already been chosen
       if $guessed_letters.include? guess
