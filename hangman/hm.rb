@@ -20,7 +20,7 @@ class Game
   ## this will randomly select a word from 5desk.txt file
   ## thats between 5 and 12 characters
   def generate_answer
-    file = File.open("5desk.txt", 'r')
+    file = File.open('5desk.txt', 'r')
 
     words = []
     file.each do |l|
@@ -119,7 +119,7 @@ class Game
       @feedback = game_json_object['feedback']
       $guessed_letters = game_json_object['guessed_letters']
       @answer = game_json_object['answer']
-      puts "Previous game loaded"
+      puts 'Previous game loaded'
       return true
     else
       return false
@@ -180,14 +180,14 @@ while play
     guess = gets.chomp
 
     # lets make sure the user enters only a single letter a-z or 0 to save or 1 to load a previous game
-    if (guess !~ /^[a-z,0,1]$/)
-        puts "You must enter only single letter a-z"
+    if guess !~ /^[a-z,0,1]$/
+        puts 'You must enter only single letter a-z'
     elsif (guess == '0') || (guess == '1')
       if guess == '0'
         game.save_game
       else
         if game.load_game
-          puts "you have loaded the previous game"
+          puts 'you have loaded the previous game'
           game.display
         end
       end
@@ -206,7 +206,7 @@ while play
     game.display
 
     if game.get_answer == game.get_feedback
-      puts "You have won!!!!!"
+      puts 'You have won!!!!!'
       play = false
       game = Game.new
     end
@@ -215,7 +215,7 @@ while play
     game.bad_choice($turns)
 
     if $turns == 8
-      puts "Bad luck you lost, better luck next time"
+      puts 'Bad luck you lost, better luck next time'
       exit 0
     end
   end
