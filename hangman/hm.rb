@@ -1,4 +1,8 @@
+require './file_utils'
+
 class Game
+
+  include FILE_UTILS
 
   def initialize
     ## create the array to draw the hangman
@@ -95,6 +99,50 @@ class Game
     @feedback
   end
 
+  def save_game
+    save = Game_json.new @hangman_array, $turns, @feedback, $guessed_letters, @answer
+    p save.to_json
+    save_file(save)
+  end
+
+  def load_game
+    game_json_object = Game_json.from_json(load_file)
+    puts game_json_object
+    @hangman_array = game_json_object['hangman_array']
+    $turns = game_json_object['turns']
+    @feedback = game_json_object['feedback']
+    $guessed_letters = game_json_object['guessed_letters']
+    @answer = game_json_object['answer']
+  end
+
+end
+
+class Game_json
+  attr_accessor :hangman_array, :turns, :feedback, :guessed_letters, :answer
+
+  def initialize(hangman_array, turns, feedback, guessed_letters, answer)
+    @hangman_array = hangman_array
+    @turns = turns
+    @feedback = feedback
+    @guessed_letters = guessed_letters
+    @answer = answer
+  end
+
+  def to_json
+    JSON.dump ({
+        :hangman_array => @hangman_array,
+        :turns => @turns,
+        :feedback => @feedback,
+        :guessed_letters => @guessed_letters,
+        :answer => @answer
+    })
+  end
+
+  def self.from_json(string)
+    data = JSON.load string
+  #  p data
+  #  self.new(data['name'], data['age'], data['gender'])
+  end
 end
 
 ## test graphics
@@ -117,12 +165,26 @@ while play
   ## lets make sure the user input is correct
   check_input = true
   while check_input
-    puts "What is your Guess (lower case: a-z): "
+    puts 'What is your Guess (a-z) or 0 to save/quit or 1 to load previous game: '
     guess = gets.chomp
 
+
     # lets make sure the user enters only a single letter a-z
-    if (guess !~ /^[a-z]$/)
+    if (guess !~ /^[a-z,0,1]$/)
         puts "You must enter only single letter a-z"
+    elsif (guess == '0') || (guess == '1')
+      puts "you have chosen to save or load a game"
+      if guess == '0'
+        game.save_game
+        game.display
+      else
+        if game.load_game
+          puts "you have loaded the previous game"
+          game.display
+        else
+          puts "You dont have a saved game"
+        end
+      end
     else
       ## lets see if the letter has already been chosen
       if $guessed_letters.include? guess
