@@ -5,10 +5,24 @@ class Game
     @hangman_array = Array.new(8) {Array.new(8,' ')}
 
     ## will choice from 5desk.txt file
-    @answer = "banana".split('')
+    #@answer = "banana".split('')
+    @answer = generate_answer.split('')
 
-    ## will need to get legth of picked word
-    @feedback = "------".split('')
+    ## will need to get length of picked word
+    #@feedback = "------".split('')
+    @feedback = Array.new(@answer.length, '-')
+  end
+
+  def generate_answer
+    file = File.open("5desk.txt", 'r')
+
+    words = []
+    file.each do |l|
+      if (l.length >= 5) && (l.length <=12)
+        words.push(l)
+      end
+    end
+    return words.sample.downcase.chomp
   end
 
   ## bad_choice will draw the hangman into the array
@@ -56,9 +70,9 @@ class Game
     puts
     puts "TURNS LEFT: \t#{8 - $turns}"
     puts
-    puts "Letters used: \t#{$guessed_letters}"
-    puts "ANSWER: \t#{@answer}"
-    puts "FEEDBACK: \t#{@feedback}"
+    puts "Letters used: \t#{$guessed_letters.join(', ')}"
+    puts "ANSWER: \t#{@answer.join}"
+    puts "FEEDBACK: \t#{@feedback.join}"
     puts
   end
 
@@ -83,15 +97,18 @@ class Game
 
 end
 
-$turns = 0
-$guessed_letters = []
-
-play = true
 ## test graphics
 #  8.times do |i|
 #    game.bad_choice(i + 1)
 #  end
 
+##########################
+#########  MAIN ##########
+##########################
+$turns = 0
+$guessed_letters = []
+
+play = true
 game = Game.new
 while play
 

@@ -9,13 +9,12 @@ file.each do |l|
   end
 end
 
-answer = words.sample
+answer = words.sample.chomp
 
 answer_length = answer.length
 
-feedback = Array.new(answer_length)
+feedback = Array.new(answer_length, '-')
 
-answer_length.times do
-
-end
+p answer
+p feedback
 
