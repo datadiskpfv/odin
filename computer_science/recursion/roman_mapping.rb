@@ -37,6 +37,7 @@ def integer_to_roman(roman_mapping, number, result = '')
     quotient, modulus = number.divmod(divisor)
     puts "Quotient: #{quotient}    Modulus: #{modulus}   Divisor: #{divisor} Result: #{result}"
     result << roman_mapping[divisor] * quotient
+    ## the modulus reduces the base case, so eventually it will get to 0
     return integer_to_roman(roman_mapping, modulus, result) if quotient > 0
   end
 end
@@ -55,6 +56,7 @@ def roman_to_integer(roman_mapping2, str, result = 0)
   roman_mapping2.keys.each do |roman|
     if str.start_with?(roman)
       result += roman_mapping2[roman]
+      ## the below reduces the base case, so eventually the str will be empty
       str = str.slice(roman.length, str.length)
       puts "STR: #{str}   Roman: #{roman}   Result: #{result}"
       return roman_to_integer(roman_mapping2, str, result)
