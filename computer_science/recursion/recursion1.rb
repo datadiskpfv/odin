@@ -2,6 +2,9 @@
 def sum_upto(n)
   return 1 if n == 1
   sum_upto(n-1) + n
+
+  ## one liner
+  ## n == 1 ? 1 : sum_upto(n-1) + n
 end
 
 puts sum_upto 4
@@ -38,6 +41,10 @@ def fib(n)
     return n
   end
   fib(n-1) + fib(n-2)
+
+  ## one liner
+  #
+  ## n < 2 ? n : fib(n-1) + fib(n-2)
 end
 
 p fib 8
