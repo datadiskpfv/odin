@@ -31,6 +31,7 @@ roman_mapping2 = {
 }
 
 def integer_to_roman(roman_mapping, number, result = '')
+  ## the base case
   return result if number == 0
   roman_mapping.keys.each do |divisor|
     quotient, modulus = number.divmod(divisor)
@@ -49,6 +50,7 @@ puts
 ## [3, 3], 3 times and 3 remainder
 p 15.divmod(4)
 def roman_to_integer(roman_mapping2, str, result = 0)
+  ## the base case
   return result if str.empty?
   roman_mapping2.keys.each do |roman|
     if str.start_with?(roman)
