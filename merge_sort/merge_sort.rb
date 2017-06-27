@@ -1,7 +1,7 @@
 def merge_sort(list)
   ## our base which is 1, split until we have one element
-  p list
-  return list if list.size <= 1
+  #p list.size
+  return list if list.size == 1
 
   ## keep splitting the list into left and right
   left,right = list.each_slice( (list.size/2.0).round ).to_a
@@ -15,8 +15,8 @@ def merge_sort(list)
 end
 
 def merge(left, right)
-  #p "LEFT (merge): #{left}"
-  #p "RIGHT (merge): #{right}"
+  p "LEFT (merge): #{left}"
+  p "RIGHT (merge): #{right}"
 
   sorted = []
   until left.empty? || right.empty?
@@ -31,5 +31,5 @@ def merge(left, right)
 end
 
 
-orig_array = %w{ 5 7 4 8 2 3 1 6 9}
+orig_array = %w{ 5 7 4 8 2 3 1 6 9 15 10 11}.map(&:to_i)
 p merge_sort(orig_array)
