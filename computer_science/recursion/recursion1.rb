@@ -49,5 +49,17 @@ end
 
 p fib 8
 
+## fibbonacci not using recursion
+def fibs(n)
+  fib_array = [0, 1]
+
+  (2..n).each do |i|
+    fib_array << fib_array[i - 1] + fib_array[i - 2]
+  end
+  fib_array[0..n]
+end
+
+p fibs 8
+
 
 puts "racecar".split('') == "racecar".split('').reverse
