@@ -6,7 +6,4 @@ class Node
     @next = n
   end
 
-  def add_node(n)
-    @next = n;
-  end
 end
