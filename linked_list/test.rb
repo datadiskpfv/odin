@@ -5,10 +5,10 @@ list = LinkedList.new
 list.append(1)
 list.append(2)
 list.append(3)
-p list
+p list.to_s
 
 list.prepend(100)
-p list
+p list.to_s
 
 puts "SIZE: #{list.size}"
 
@@ -18,3 +18,13 @@ puts "SIZE: #{list.size}"
 #p list.at(2).value
 
 p list.pop.value
+p list.tail.value
+
+puts "================"
+p list.to_s
+
+puts "================"
+p list.contains?(100)
+
+puts "================"
+p list.find?(100)

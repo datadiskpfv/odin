@@ -54,9 +54,53 @@ class LinkedList
   def pop
     current = @head
     (@size - 2).times do
-      p "h"
       current = current.next
     end
-    return current
+    @size -= 1
+    current.next = nil
+    @tail = current
+  end
+
+  def to_s
+    list = []
+    current = @head
+    list << current.value
+    (@size - 1).times do
+      current = current.next
+      list << current.value
+    end
+    return list
+  end
+
+  def contains?(c)
+    current = @head
+    if current.value == c
+      return true
+    end
+
+    (@size - 1).times do
+      current = current.next
+      if current.value == c
+        return true
+      end
+    end
+
+    return false
+  end
+
+  def find?(c)
+    current = @head
+    if current.value == c
+      return 0
+    end
+
+    (@size - 1).times do |i|
+      current = current.next
+      if current.value == c
+        return i + 1
+      end
+    end
+
+    return nil
   end
 end
