@@ -12,19 +12,22 @@ p list.to_s
 
 puts "SIZE: #{list.size}"
 
-#puts list.head.value
-#puts list.tail.value
+puts list.head.value
+puts list.tail.value
 
-#p list.at(2).value
+p list.at(2).value
 
 p list.pop.value
 p list.tail.value
 
 puts "================"
+list.append(4)
+list.append(5)
 p list.to_s
 
 puts "================"
-p list.contains?(100)
+p list.contains?(5)
 
 puts "================"
-p list.find?(100)
+p list.at(3).value
+p list.find?(4)

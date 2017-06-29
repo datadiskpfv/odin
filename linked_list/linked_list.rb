@@ -45,17 +45,13 @@ class LinkedList
 
   def at(i)
     current = @head
-    i.times do
-      current = current.next
-    end
+    i.times { current = current.next }
     return current
   end
 
   def pop
     current = @head
-    (@size - 2).times do
-      current = current.next
-    end
+    (@size - 2).times { current = current.next }
     @size -= 1
     current.next = nil
     @tail = current
@@ -74,15 +70,11 @@ class LinkedList
 
   def contains?(c)
     current = @head
-    if current.value == c
-      return true
-    end
+    return true if current.value == c
 
     (@size - 1).times do
       current = current.next
-      if current.value == c
-        return true
-      end
+      return true if current.value == c
     end
 
     return false
@@ -90,15 +82,11 @@ class LinkedList
 
   def find?(c)
     current = @head
-    if current.value == c
-      return 0
-    end
+    return 0 if current.value == c
 
     (@size - 1).times do |i|
       current = current.next
-      if current.value == c
-        return i + 1
-      end
+      return i + 1 if current.value == c
     end
 
     return nil
