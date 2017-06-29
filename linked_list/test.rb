@@ -26,11 +26,15 @@ list.append(5)
 p list.to_s
 
 puts "================"
-p list.contains?(5)
+puts "Contains 5: #{list.contains?(5)}"
 
 puts "================"
-p list.at(3).value
-p list.find?(4)
+puts "The value at index 3 is #{list.at(3).value}"
+puts "Find 4: find at index #{list.find?(4)}"
 
 p list.at(0).value
 p list.at(4).value
+
+puts "================"
+p list.pop.value
+p list.to_s

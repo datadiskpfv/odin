@@ -53,43 +53,31 @@ class LinkedList
   end
 
   def pop
-    current = @head
-    (@size - 2).times { current = current.next }
-    @size -= 1
+    current = at(@size - 2)
     current.next = nil
+    @size -= 1
     @tail = current
   end
 
   def to_s
-    list = []
-    current = @head
-    list << current.value
-    (@size - 1).times do
-      current = current.next
-      list << current.value
+    list = ''
+    (@size).times do |i|
+      list << "(#{at(i).value.to_s})->"
     end
-    return list
+    return list << "nil"
   end
 
   def contains?(c)
-    current = @head
-    return true if current.value == c
-
-    (@size - 1).times do
-      current = current.next
-      return true if current.value == c
+    (@size).times do |i|
+      return true if at(i).value == c
     end
 
     return false
   end
 
   def find?(c)
-    current = @head
-    return 0 if current.value == c
-
-    (@size - 1).times do |i|
-      current = current.next
-      return i + 1 if current.value == c
+    (@size).times do |i|
+      return i if at(i).value == c
     end
 
     return nil
