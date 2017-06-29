@@ -44,6 +44,9 @@ class LinkedList
   end
 
   def at(i)
+    return @head if i == 0
+    return @tail if i == (size - 1)
+
     current = @head
     i.times { current = current.next }
     return current

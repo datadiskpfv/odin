@@ -31,3 +31,6 @@ p list.contains?(5)
 puts "================"
 p list.at(3).value
 p list.find?(4)
+
+p list.at(0).value
+p list.at(4).value
