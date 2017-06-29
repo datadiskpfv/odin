@@ -64,7 +64,7 @@ class LinkedList
     (@size).times do |i|
       list << "(#{at(i).value.to_s})->"
     end
-    return list << "nil"
+    return list << 'nil'
   end
 
   def contains?(c)
