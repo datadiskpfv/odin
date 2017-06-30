@@ -81,4 +81,34 @@ class Binary_Tree
       current_node = node_list.shift
     end
   end
+
+  def bfs_display
+    current_node = @root
+
+    node_list = []
+    values = []
+
+    node_list << current_node.left if current_node.left != nil
+    node_list << current_node.right if current_node.right != nil
+
+    while !node_list.empty?
+      values << current_node.value
+      current_node = node_list.shift
+      node_list << current_node.left if current_node.left != nil
+      node_list << current_node.right if current_node.right != nil
+    end
+
+    values << current_node.value
+
+    return values
+  end
+
+  def dfs_preorder
+  end
+
+  def dfs_inorder
+  end
+
+  def dfs_postorder
+  end
 end

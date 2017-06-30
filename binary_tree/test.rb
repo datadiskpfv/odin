@@ -26,4 +26,5 @@ btree.insert_array(a1)
 #btree.insert_array(a3)
 #p btree
 
-btree.bfs_search(9)
+#btree.bfs_search(9)
+p btree.bfs_display
