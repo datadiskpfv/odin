@@ -27,4 +27,10 @@ btree.insert_array(a1)
 #p btree
 
 #btree.bfs_search(9)
-p btree.bfs_display
+#p btree.bfs_display
+
+btree.dfs_preorder(btree.root)
+puts
+btree.dfs_inorder(btree.root)
+puts
+btree.dfs_postorder(btree.root)
