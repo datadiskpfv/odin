@@ -15,11 +15,15 @@ btree = Binary_Tree.new(Bnode.new(nil, nil, nil, nil))
 #p btree
 
 a1 = [6, 4, 10, 2, 5, 7, 11, 1, 3, 9, 8]
-a2 = [6, 4]
+#a2 = [6, 4]
 btree.insert_array(a1)
 
-btree.insert_array(a2)
-btree.insert(6)
-btree.insert(1)
+#btree.insert_array(a2)
+#btree.insert(6)
+#btree.insert(1)
 
-p btree
+#a3 = [13, 12]
+#btree.insert_array(a3)
+#p btree
+
+btree.bfs_search(9)

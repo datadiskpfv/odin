@@ -41,11 +41,11 @@ class Binary_Tree
         puts "added #{a[0]} to empty binary tree"
         current_node.value = a.shift
       elsif (a[0].to_i < current_node.value) && (current_node.left == nil)
-        puts "left #{current_node.value} added #{a[0].to_i}"
+        puts "left #{current_node.value} added #{a[0].to_i}, node: #{current_node}"
         current_node.left = Bnode.new(current_node,nil,nil,a.shift)
         current_node = @root
       elsif (a[0].to_i > current_node.value) && (current_node.right == nil)
-        puts "right #{current_node.value} add #{a[0].to_i}"
+        puts "right #{current_node.value} add #{a[0].to_i}, node: #{current_node}"
         current_node.right = Bnode.new(current_node,nil,nil,a.shift)
         current_node = @root
       elsif (a[0].to_i < current_node.value)
@@ -58,6 +58,29 @@ class Binary_Tree
       else
         return
       end
+    end
+  end
+
+  def bfs_search(v)
+    current_node = @root
+
+    found = false
+    right = ''
+    left = ''
+    node_list = []
+
+    while !found
+      if (current_node.value == v)
+        puts "Found your value #{v}, node is #{current_node} and value is #{current_node.value}"
+        found = true
+      else
+        node_list << current_node.left if current_node.left != nil
+        node_list << current_node.right if current_node.right != nil
+
+        puts "Adding left node #{current_node.left.value} to node_list" if current_node.left != nil
+        puts "right node #{current_node.right.value} to node_list" if current_node.right != nil
+      end
+      current_node = node_list.shift
     end
   end
 end
