@@ -65,8 +65,6 @@ class Binary_Tree
     current_node = @root
 
     found = false
-    right = ''
-    left = ''
     node_list = []
 
     while !found
