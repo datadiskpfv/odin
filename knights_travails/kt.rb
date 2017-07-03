@@ -51,9 +51,9 @@ puts "Checked: #{checked}"
 
 route << knight.location
 puts "route1: #{route}"
-until knight.previous.nil?
-  route << knight.previous.location
-  knight = knight.previous
+until knight.prev_move.nil?
+  route << knight.prev_move.location
+  knight = knight.prev_move
   puts "route: #{route}"
 end
 
