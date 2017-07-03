@@ -1,45 +1,26 @@
 class Knight
-  attr_accessor :name, :trail
+  attr_accessor :location, :moves, :previous
 
-  def moves(pos)
-    moves = Array.new
-    moves << [(pos[0] + 1), (pos[1] + 2) ] if check_move([(pos[0] + 1), (pos[1] + 2) ])
-    moves << [(pos[0] + 1), (pos[1] - 2) ] if check_move([(pos[0] + 1), (pos[1] - 2) ])
-    moves << [(pos[0] - 1), (pos[1] - 2) ] if check_move([(pos[0] - 1), (pos[1] - 2) ])
-    moves << [(pos[0] - 1), (pos[1] + 2) ] if check_move([(pos[0] - 1), (pos[1] + 2) ])
-    moves << [(pos[0] + 2), (pos[1] + 1) ] if check_move([(pos[0] + 2), (pos[1] + 1) ])
-    moves << [(pos[0] + 2), (pos[1] - 1) ] if check_move([(pos[0] + 2), (pos[1] - 1) ])
-    moves << [(pos[0] - 2), (pos[1] - 1) ] if check_move([(pos[0] - 2), (pos[1] - 1) ])
-    moves << [(pos[0] - 2), (pos[1] + 1) ] if check_move([(pos[0] - 2), (pos[1] + 1) ])
-    p moves
+  def initialize(coordinates, previous=nil)
+    @location = coordinates
+    possible_moves(coordinates)
+    @previous = previous
   end
 
-  def check_move(m)
-    x = m[0]
-    y = m[1]
-    #puts "X: #{x} Y: #{y}"
-    if (x >= 0) && (x <= 7) && (y >= 0) && (y <= 7)
-      #puts "Good Move: #{m}"
-      return true
+  def possible_moves(destination)
+    @moves = [[(destination[0] + 2), (destination[1] + 1)],
+              [(destination[0] + 2), (destination[1] - 1)],
+              [(destination[0] - 2), (destination[1] + 1)],
+              [(destination[0] - 2), (destination[1] - 1)],
+              [(destination[0] + 1), (destination[1] + 2)],
+              [(destination[0] + 1), (destination[1] - 2)],
+              [(destination[0] - 1), (destination[1] + 2)],
+              [(destination[0] - 1), (destination[1] - 1)]]
+
+    @moves.reject! do |cell|
+      cell.any? { |x| x < 0 } || cell.any? { |x| x > 7 }
     end
-    return false
+    return moves
   end
 
-  def initialize(n)
-    @name = n
-    @trail = []
-  end
-
-  def to_s
-    return @name
-  end
-
-  def add_trail(m)
-    puts "Adding #{m}"
-    @trail << m
-  end
-
-  def get_trail
-    return @trail
-  end
 end
