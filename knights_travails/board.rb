@@ -21,7 +21,17 @@ class Board
     end
   end
 
-  def place_piece(p, coords)
+  def place_piece(p, new_coords, prev_coords)
+    square_new = @board[new_coords[0]][new_coords[1]]
+    square_prev = @board[prev_coords[0]][prev_coords[1]]
+
+    square_new.place p
+    square_prev.place nil
+
+    p.add_trail(new_coords)
+  end
+
+  def initial_place_piece(p, coords)
     square = @board[coords[0]][coords[1]]
     square.place p
   end
