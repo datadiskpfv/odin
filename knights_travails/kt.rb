@@ -25,7 +25,7 @@ require './knight.rb'
 #p knight.get_trail
 
 #destination = [4,3]
-destination = [6,7]
+destination = [7,7]
 start = [0,0]
 checked = []
 queue = []
