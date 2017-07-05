@@ -11,16 +11,15 @@ game = Connect_four.new
 
 #puts "Welcome #{player1.name} and #{player2.name}"
 
-player1 = Player.new('Paul', 'x')
-player2 = Player.new('Lorraine', 'o')
+game.player1 = Player.new('Paul', 'x')
+game.player2 = Player.new('Lorraine', 'o')
+game.player = game.player1
 
 game.display
 
-player = player1
-
 while true
-  game.player_move_check(player)
-  game.add_token(player)
+  game.player_move_check(game.player)
+  game.add_token(game.player)
   game.display
-  player = player == player1 ? player2 : player1
+  game.switch_player
 end

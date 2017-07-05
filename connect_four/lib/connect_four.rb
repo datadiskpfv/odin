@@ -1,6 +1,6 @@
 class Connect_four
 
-  attr_accessor :board, :column, :message
+  attr_accessor :board, :column, :message, :player1, :player2, :player
 
   def initialize
     cols = 7
@@ -59,5 +59,9 @@ class Connect_four
        end
 
      end
+  end
+
+  def switch_player
+    @player = @player == @player1 ? @player2 : @player1
   end
 end
