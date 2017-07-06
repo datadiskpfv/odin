@@ -56,7 +56,7 @@ class Connect_four
 
        if s[@column.to_i - 1].nil?
         s[@column.to_i - 1] = @player.symbol
-        check_win(i)
+        check_win
         return true
        end
 
@@ -67,38 +67,40 @@ class Connect_four
     @player = @player == @player1 ? @player2 : @player1
   end
 
-  def check_win(index)
+  def check_horizontal(col,row)
+    if col < 4 #checks for horizontal line (---) that are 4
+      #puts "[#{col}][#{row }] = #{@board[col][row]}"
+      #puts "[#{col}][#{row + 1}] = #{@board[col][row + 1]}"
+      #puts "[#{col}][#{row + 2}] = #{@board[col][row + 2]}"
+      #puts "[#{col}][#{row + 3}] = #{@board[col][row + 3]}"
 
-    puts "checking if a win - Column #{@column}  Index: #{index}"
-    ## horizontal left
+      if [@board[col][row],@board[col][row + 1],@board[col][row + 2],@board[col][row + 3]].all? {|s| s == @player.symbol}
+        @win = true
+      end
+    end
+  end
+
+  def check_win
+    7.times do |col|
+      6.times do |row|
+        check_horizontal(col,row)
+
+        if @win
+          @message = "#{@player.name } wins"
+          display
+          exit 0
+        end
+      end
+    end
+
+    #puts "checking if a win - Column #{@column}  Index: #{index}"
+
     #puts "[#{index}][#{@column.to_i - 1}] = #{@board[index][@column.to_i - 1]}"
     #puts "[#{index}][#{@column.to_i - 2}] = #{@board[index][@column.to_i - 2]}"
     #puts "[#{index}][#{@column.to_i - 3}] = #{@board[index][@column.to_i - 3]}"
     #puts "[#{index}][#{@column.to_i - 4}] = #{@board[index][@column.to_i - 4]}"
 
-    ## horizontal right
-    #puts "[#{index}][#{@column.to_i - 1}] = #{@board[index][@column.to_i - 1]}"
-    #puts "[#{index}][#{@column.to_i}] = #{@board[index][@column.to_i]}"
-    #puts "[#{index}][#{@column.to_i + 1}] = #{@board[index][@column.to_i + 1]}"
-    #puts "[#{index}][#{@column.to_i + 2}] = #{@board[index][@column.to_i + 2]}"
 
-    ## vertical
-    #puts "[#{index}][#{@column.to_i - 1}] = #{@board[index][@column.to_i - 1]}"
-    #puts "[#{index - 1}][#{@column.to_i - 1}] = #{@board[index - 1][@column.to_i - 1]}"
-    #puts "[#{index - 2}][#{@column.to_i - 1}] = #{@board[index - 2][@column.to_i - 1]}"
-    #puts "[#{index - 3}][#{@column.to_i - 1}] = #{@board[index - 3][@column.to_i - 1]}"
-
-    ## horizontal left
-    wins = true if [@board[index][@column.to_i - 1], @board[index][@column.to_i - 2], @board[index][@column.to_i - 3], @board[index][@column.to_i - 4]].all? {|l| l == @player.symbol}
-    ## horizontal right
-    wins = true if [@board[index][@column.to_i - 1], @board[index][@column.to_i], @board[index][@column.to_i + 1], @board[index][@column.to_i + 2]].all? {|l| l == @player.symbol}
-    ## vertical
-    wins = true if [@board[index][@column.to_i - 1], @board[index - 1][@column.to_i - 1], @board[index - 2][@column.to_i - 1], @board[index - 3][@column.to_i - 1]].all? {|l| l == @player.symbol}
-    if wins
-      @message = "#{@player.name } wins"
-      display
-      exit 0
-    end
 
   end
 end
