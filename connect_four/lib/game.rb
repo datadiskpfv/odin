@@ -18,8 +18,8 @@ game.player = game.player1
 game.display
 
 while true
-  game.player_move_check(game.player)
-  game.add_token(game.player)
+  game.player_move_check
+  game.add_token
   game.display
   game.switch_player
 end

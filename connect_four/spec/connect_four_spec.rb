@@ -4,9 +4,16 @@ require 'Player'
 
 describe Connect_four do
 
+
   let(:game) { Connect_four.new }
   let(:player1) { Player.new('Paul', 'x') }
   let(:player2) { Player.new('Lorraine', 'o') }
+
+  before(:each) do
+    game.player1 = player1
+    game.player2 = player2
+    game.player = player1
+  end
 
   context 'Game Setup' do
     it 'New Game instance of Connect_four' do
@@ -29,6 +36,11 @@ describe Connect_four do
 
     it 'Second player is Lorraine' do
       expect(player2.name).to eql("Lorraine")
+    end
+
+    it 'Switch Player from Paul to Lorraine' do
+      game.switch_player
+      expect(game.player.name).to eq('Lorraine')
     end
   end
 
