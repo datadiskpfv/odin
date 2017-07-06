@@ -1,6 +1,6 @@
 class Connect_four
 
-  attr_accessor :board, :column, :message, :player1, :player2, :player, :win
+  attr_accessor :board, :column, :message, :player1, :player2, :player, :win, :turns
 
   def initialize
     cols = 7
@@ -11,8 +11,9 @@ class Connect_four
       @board << Array.new(rows) {nil}
     end
 
-    message = ''
-    win = false
+    @message = ''
+    @win = false
+    @turns = 0
   end
 
   def display
@@ -56,6 +57,7 @@ class Connect_four
 
        if s[@column.to_i - 1].nil?
         s[@column.to_i - 1] = @player.symbol
+        @turns += 1
         check_win
         return true
        end
@@ -68,15 +70,51 @@ class Connect_four
   end
 
   def check_horizontal(col,row)
-    if col < 4 #checks for horizontal line (---) that are 4
-      #puts "[#{col}][#{row }] = #{@board[col][row]}"
-      #puts "[#{col}][#{row + 1}] = #{@board[col][row + 1]}"
-      #puts "[#{col}][#{row + 2}] = #{@board[col][row + 2]}"
-      #puts "[#{col}][#{row + 3}] = #{@board[col][row + 3]}"
+    if row < 4 # no point checking anything less than 4
+      #puts "H: [#{col}][#{row }] = #{@board[col][row]}"
+      #puts "H: [#{col}][#{row + 1}] = #{@board[col][row + 1]}"
+      #puts "H: [#{col}][#{row + 2}] = #{@board[col][row + 2]}"
+      #puts "H: [#{col}][#{row + 3}] = #{@board[col][row + 3]}"
 
-      if [@board[col][row],@board[col][row + 1],@board[col][row + 2],@board[col][row + 3]].all? {|s| s == @player.symbol}
-        @win = true
-      end
+      @win = true if [@board[col][row],@board[col][row + 1],@board[col][row + 2],@board[col][row + 3]].all? {|s| s == @player.symbol}
+
+    end
+  end
+
+  def check_vertical(col,row)
+    if col < 4  #no point in checking anything less than 4
+      #puts "V: [#{col}][#{row}] = #{@board[col][row]}"
+      #puts "V: [#{col + 1}][#{row}] = #{@board[col + 1][row]}"
+      #puts "V: [#{col + 2}][#{row}] = #{@board[col + 2][row]}"
+      #puts "V: [#{col + 3}][#{row}] = #{@board[col + 3][row]}"
+
+      @win = true if [@board[col][row],@board[col + 1][row],@board[col + 2][row],@board[col + 3][row]].all? {|s| s == @player.symbol}
+
+    end
+  end
+
+  def check_diag_right(col,row)
+    if (row < 4) && (col < 3)  #no point in checking anything less than 4
+      #puts "DR: [#{col}][#{row}] = #{@board[col][row]}"
+      #puts "DR: [#{col + 1}][#{row + 1}] = #{@board[col + 1][row + 1]}"
+      #puts "DR: [#{col + 2}][#{row + 2}] = #{@board[col + 2][row + 2]}"
+      #puts "DR: [#{col + 3}][#{row + 3}] = #{@board[col + 3][row + 3]}"
+
+      @win = true if [@board[col][row],@board[col + 1][row + 1],@board[col + 2][row + 2],@board[col + 3][row + 3]].all? {|s| s == @player.symbol}
+
+    end
+  end
+
+  def check_diag_left(col,row)
+    if (row > 2) && (col < 3)  #no point in checking anything less than 4
+      #puts"-----------------------------------------------------------"
+      #puts "DL: [#{col}][#{row}] = #{@board[col][row]}"
+      #puts "DL: [#{col + 1}][#{row - 1}] = #{@board[col + 1][row - 1]}"
+      #puts "DL: [#{col + 2}][#{row - 2}] = #{@board[col + 2][row - 2]}"
+      #puts "DL: [#{col + 3}][#{row - 3}] = #{@board[col + 3][row - 3]}"
+
+      @win = true if [@board[col][row],@board[col + 1][row - 1],@board[col + 2][row - 2],@board[col + 3][row - 3]].all? {|s| s == @player.symbol}
+
     end
   end
 
@@ -84,23 +122,22 @@ class Connect_four
     7.times do |col|
       6.times do |row|
         check_horizontal(col,row)
+        check_vertical(col,row)
+        check_diag_right(col,row)
+        check_diag_left(col,row)
 
         if @win
           @message = "#{@player.name } wins"
           display
-          exit 0
+          break
+          #exit 0
         end
       end
+      break if @win
     end
+  end
 
-    #puts "checking if a win - Column #{@column}  Index: #{index}"
-
-    #puts "[#{index}][#{@column.to_i - 1}] = #{@board[index][@column.to_i - 1]}"
-    #puts "[#{index}][#{@column.to_i - 2}] = #{@board[index][@column.to_i - 2]}"
-    #puts "[#{index}][#{@column.to_i - 3}] = #{@board[index][@column.to_i - 3]}"
-    #puts "[#{index}][#{@column.to_i - 4}] = #{@board[index][@column.to_i - 4]}"
-
-
-
+  def game_reset
+    @win = false
   end
 end

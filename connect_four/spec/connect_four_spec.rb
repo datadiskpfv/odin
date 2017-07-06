@@ -13,6 +13,7 @@ describe Connect_four do
     game.player1 = player1
     game.player2 = player2
     game.player = player1
+    game.game_reset
   end
 
   context 'Game Setup' do
@@ -60,16 +61,113 @@ describe Connect_four do
   context 'Column test' do
     it 'column is not full' do
       game.column = 1
-      expect(game.add_token(player1)).to eql(true)
+      expect(game.add_token).to eql(true)
     end
 
     it 'column full' do
       game.column = 1
-      ## repeat six times to fill the column
-      6.times do
-        expect(game.add_token(player1)).to eql(true)
+
+      ## add player ones entries
+      game.switch_player
+      3.times do
+        expect(game.add_token).to eql(true)
       end
-      expect(game.add_token(player1)).to eql(false)
+      ## switch player and full up the column
+      game.switch_player
+      3.times do
+        expect(game.add_token).to eql(true)
+      end
+      ## the column is full so this should return false
+      expect(game.add_token).to eql(false)
     end
   end
+
+  context 'check horizontal win' do
+
+    it 'horizontal column one' do
+      game.board.transpose[-1]
+      4.times do |r|
+        game.board[0][r] = 'x'
+      end
+      game.check_win
+
+      expect(game.win).to eql(true)
+    end
+
+    it 'horizontal column four' do
+      game.board.transpose[-1]
+      4.times do |r|
+        game.board[3][r] = 'x'
+      end
+      game.check_win
+      expect(game.win).to eql(true)
+    end
+  end
+
+  context 'check vertical win' do
+
+    it 'vertical row one' do
+      game.board.transpose[-1]
+      4.times do |r|
+        game.board[r][0] = 'x'
+      end
+      game.check_win
+
+      expect(game.win).to eql(true)
+    end
+
+    it 'vertical row four' do
+      game.board.transpose[-1]
+      4.times do |r|
+        game.board[r + 2][3] = 'x'
+      end
+      game.check_win
+      expect(game.win).to eql(true)
+    end
+  end
+
+  context 'check right diagonal win' do
+
+    it 'diagonal test one' do
+      game.board.transpose[-1]
+      4.times do |r|
+        game.board[r + 1][r + 2] = 'x'
+      end
+      game.check_win
+
+      expect(game.win).to eql(true)
+    end
+
+    it 'diagonal test two' do
+      game.board.transpose[-1]
+      4.times do |r|
+        game.board[r][ r + 1] = 'x'
+      end
+      game.check_win
+      expect(game.win).to eql(true)
+    end
+  end
+
+  context 'check left diagonal win' do
+
+    it 'diagonal test one' do
+      game.board.transpose[-1]
+      5.downto(2) do |r|
+        game.board[r][r + 1] = 'x'
+      end
+      game.check_win
+
+      expect(game.win).to eql(true)
+    end
+
+    it 'diagonal test two' do
+      game.board.transpose[-1]
+      5.downto(2) do |r|
+        game.board[r][ r - 1] = 'x'
+      end
+      game.check_win
+      expect(game.win).to eql(true)
+    end
+  end
+
 end
