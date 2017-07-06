@@ -152,8 +152,10 @@ describe Connect_four do
 
     it 'diagonal test one' do
       game.board.transpose[-1]
-      5.downto(2) do |r|
-        game.board[r][r + 1] = 'x'
+      c = 0
+      6.downto(2) do |r|
+        game.board[r - 1][c] = 'x'
+        c += 1
       end
       game.check_win
 
@@ -162,12 +164,13 @@ describe Connect_four do
 
     it 'diagonal test two' do
       game.board.transpose[-1]
+      c = 2
       5.downto(2) do |r|
-        game.board[r][ r - 1] = 'x'
+        game.board[r][c] = 'x'
+        c += 1
       end
       game.check_win
       expect(game.win).to eql(true)
     end
   end
-
 end
