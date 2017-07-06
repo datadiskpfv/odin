@@ -153,7 +153,7 @@ describe Connect_four do
     it 'diagonal test one' do
       game.board.transpose[-1]
       c = 0
-      6.downto(2) do |r|
+      6.downto(3) do |r|
         game.board[r - 1][c] = 'x'
         c += 1
       end
