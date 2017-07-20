@@ -5,22 +5,14 @@ class Bishop < Chess_Piece
   def initialize(color, name)
     @name = name
     @color = color
-    @image = "\u2657"
+    @image = color == 'White' ? "\u2657" : "\u265D"
   end
 
   def startup
     if @color == 'White'
-      if @name == 'Bishop1'
-        return 'A3'
-      else
-        return 'A6'
-      end
+      return @name == 'Bishop1' ? 'A3' : 'A6'
     else
-      if @name == 'Bishop1'
-        return 'H3'
-      else
-        return 'H6'
-      end
+      return @name == 'Bishop1' ? 'H3' : 'H6'
     end
   end
 end

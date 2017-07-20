@@ -5,6 +5,7 @@ require_relative 'Queen'
 require_relative 'Rook'
 require_relative 'Knight'
 require_relative 'Bishop'
+require_relative 'Pawn'
 
 class Game
 

@@ -4,22 +4,14 @@ class Knight <Chess_Piece
   def initialize(color, name)
     @name = name
     @color = color
-    @image = "\u2658"
+    @image = color == 'White' ? "\u2658" : "\u265E"
   end
 
   def startup
     if @color == 'White'
-      if @name == 'Knight1'
-        return 'A2'
-      else
-        return 'A7'
-      end
+      return @name == 'Knight1' ? 'A2' : 'A7'
     else
-      if @name == 'Knight1'
-        return 'H2'
-      else
-        return 'H7'
-      end
+      return @name == 'Knight1' ? 'H2' : 'H7'
     end
   end
 end

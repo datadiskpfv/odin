@@ -5,22 +5,14 @@ class Rook < Chess_Piece
   def initialize(color, name)
     @name = name
     @color = color
-    @image = "\u2656"
+    @image = color == 'White' ? "\u2656" : "\u265C"
   end
 
   def startup
     if @color == 'White'
-      if @name == 'Rook1'
-       return 'A1'
-      else
-        return 'A8'
-      end
+      return @name == 'Rook1' ? 'A1' : 'A8'
     else
-      if @name == 'Rook1'
-        return 'H1'
-      else
-        return 'H8'
-      end
+      return @name == 'Rook1' ? 'H1' : 'H8'
     end
   end
 end
