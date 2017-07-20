@@ -1,6 +1,6 @@
 require_relative 'chess_piece'
 
-class Pawn <Chess_Piece
+class Pawn < Chess_Piece
   def initialize(color, name)
     @name = name
     @color = color
