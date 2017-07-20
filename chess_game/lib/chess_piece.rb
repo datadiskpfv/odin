@@ -1,5 +1,5 @@
 class Chess_Piece
 
-  attr_accessor :name, :color
+  attr_accessor :name, :color, :image
 
 end
