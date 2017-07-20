@@ -1,25 +1,25 @@
 require_relative 'chess_piece'
 
-class Bishop < Chess_Piece
+class Rook < Chess_Piece
 
   def initialize(color, name)
     @name = name
     @color = color
-    @image = "\u2657"
+    @image = "\u2656"
   end
 
   def startup
     if @color == 'White'
-      if @name == 'Bishop1'
-        return 'A3'
+      if @name == 'Rook1'
+       return 'A1'
       else
-        return 'A6'
+        return 'A8'
       end
     else
-      if @name == 'Bishop1'
-        return 'H3'
+      if @name == 'Rook1'
+        return 'H1'
       else
-        return 'H6'
+        return 'H8'
       end
     end
   end

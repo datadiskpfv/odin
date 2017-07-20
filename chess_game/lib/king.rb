@@ -1,4 +1,4 @@
-require '../lib/chess_piece'
+require_relative 'chess_piece'
 
 class King < Chess_Piece
 
@@ -8,4 +8,11 @@ class King < Chess_Piece
     @image = "\u2654"
   end
 
+  def startup
+    if @color == 'White'
+      return 'A5'
+    else
+      return 'H5'
+    end
+  end
 end

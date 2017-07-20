@@ -1,4 +1,4 @@
-require './square'
+require_relative 'square'
 
 class Board
   attr_accessor :board
@@ -16,21 +16,21 @@ class Board
   def display_board
     puts "      1     2     3     4     5     6     7     8   "
     puts "   -------------------------------------------------"
-    puts " H |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |" % [square(7,0), square(7,1), @board[7][2], @board[7][3], @board[7][4], @board[7][5], @board[7][6], @board[7][7], @board[7][8]]
+    puts " H |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |" % [square('H1'), square('H2'), square('H3'), square('H4'), square('H5'), square('H6'), square('H7'), square('H8')]
     puts "   -------------------------------------------------"
-    puts " G |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |" % [@board[6][0], @board[6][1], @board[6][2], @board[6][3], @board[6][4], @board[6][5], @board[6][6], @board[6][7], @board[6][8]]
+    puts " G |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |" % [square('G1'), square('G2'), square('G3'), square('G4'), square('G5'), square('G6'), square('G7'), square('G8')]
     puts "   -------------------------------------------------"
-    puts " F |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |" % [@board[5][0], @board[5][1], @board[5][2], @board[5][3], @board[5][4], @board[5][5], @board[5][6], @board[5][7], @board[5][8]]
+    puts " F |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |" % [square('F1'), square('F2'), square('F3'), square('F4'), square('F5'), square('F6'), square('F7'), square('F8')]
     puts "   -------------------------------------------------"
-    puts " E |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |" % [@board[4][0], @board[4][1], @board[4][2], @board[4][3], @board[4][4], @board[4][5], @board[4][6], @board[4][7], @board[4][8]]
+    puts " E |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |" % [square('E1'), square('E2'), square('E3'), square('E4'), square('E5'), square('E6'), square('E7'), square('E8')]
     puts "   -------------------------------------------------"
-    puts " D |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |" % [@board[3][0], @board[3][1], @board[3][2], @board[3][3], @board[3][4], @board[3][5], @board[3][6], @board[3][7], @board[3][8]]
+    puts " D |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |" % [square('D1'), square('D2'), square('D3'), square('D4'), square('D5'), square('D6'), square('D7'), square('D8')]
     puts "   -------------------------------------------------"
-    puts " C |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |" % [@board[2][0], @board[2][1], @board[2][2], @board[2][3], @board[2][4], @board[2][5], @board[2][6], @board[2][7], @board[2][8]]
+    puts " C |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |" % [square('C1'), square('C2'), square('C3'), square('C4'), square('C5'), square('C6'), square('C7'), square('C8')]
     puts "   -------------------------------------------------"
-    puts " B |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |" % [@board[1][0], @board[1][1], @board[1][2], @board[1][3], @board[1][4], @board[1][5], @board[1][6], @board[1][7], @board[1][8]]
+    puts " B |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |%3s |" % [square('B1'), square('B2'), square('B3'), square('B4'), square('B5'), square('B6'), square('B7'), square('B8')]
     puts "   -------------------------------------------------"
-    puts " A |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |" % [@board[0][0], @board[0][1], @board[0][2], @board[0][3], @board[0][4], @board[0][5], @board[0][6], @board[0][7], @board[0][8]]
+    puts " A |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |%3s  |%3s |" % [square('A1'), square('A2'), square('A3'), square('A4'), square('A5'), square('A6'), square('A7'), square('A8')]
     puts "   -------------------------------------------------"
     puts "#{@message}"
     @message = ''
@@ -38,26 +38,34 @@ class Board
 
   def add_piece(piece, coords)
 
+    v, h = convert_coords(coords)
+
+    square = board[v][h]
+    square.contains = piece
+
+    return "board: [#{v}][#{h}]"
+
+  end
+
+  def convert_coords(coords)
     v, h = coords.split('')
-    puts "Coord:  #{v}#{h}"
     h = h.to_i - 1
     v = v.ord - 65
 
-    #puts "V: #{v}"
-    #puts "H: #{h}"
-
-    puts "board: [#{v}][#{h}]"
-
-    #square = board[7][1]
-    #square.contains = piece
+    return v,h
   end
 
-  def square(h,v)
-    #@board[h][v].contains.name
-    if (@board[h][v].contains.nil?)
-      return @board[h][v].contains
+  def move_piece(from, to)
+
+  end
+
+  def square(coords)
+    v, h = convert_coords(coords)
+
+    if (@board[v][h].contains.nil?)
+      return @board[v][h].contains
     else
-      @board[h][v].contains.image
+      @board[v][h].contains.image
     end
   end
 end

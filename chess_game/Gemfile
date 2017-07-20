@@ -1,0 +1,10 @@
+# Gemfile
+#
+# run the below
+#
+# bundle install --path .bundle
+#
+
+source "https://rubygems.org"
+
+gem "rspec"
