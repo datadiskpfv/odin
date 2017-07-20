@@ -5,14 +5,14 @@ class King < Chess_Piece
   def initialize(color)
     @name = 'King'
     @color = color
-    @image = "\u2654"
+    @image = color == 'White' ? "\u2654" : "\u265A"
   end
 
   def startup
-    if @color == 'White'
-      return 'A5'
-    else
-      return 'H5'
-    end
+    return @color == 'White' ? 'A5' : 'H5'
+    #  return 'A5'
+    #else
+    #  return 'H5'
+    #end
   end
 end
