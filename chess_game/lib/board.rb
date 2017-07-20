@@ -37,8 +37,19 @@ class Board
   end
 
   def add_piece(piece, coords)
-    square = board[7][1]
-    square.contains = piece
+
+    v, h = coords.split('')
+    puts "Coord:  #{v}#{h}"
+    h = h.to_i - 1
+    v = v.ord - 65
+
+    #puts "V: #{v}"
+    #puts "H: #{h}"
+
+    puts "board: [#{v}][#{h}]"
+
+    #square = board[7][1]
+    #square.contains = piece
   end
 
   def square(h,v)

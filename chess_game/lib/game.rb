@@ -14,15 +14,18 @@ class Game
     #@player2 = Player.new(name, 'white')
 
     board = Board.new
+    king= King.new('White')
+
+    board.add_piece(king, 'H1')
 
 
-    pieces = {'King' => nil}
-    pieces['King'] = King.new('White')
+    #pieces = {'King' => nil}
+    #pieces['King'] = King.new('White')
 
     #puts "King: #{pieces['King'].name}"
 
-    board.add_piece(pieces['King'], '00')
-    board.display_board
+    #board.add_piece(pieces['King'], '00')
+    #board.display_board
   end
 
   def start
