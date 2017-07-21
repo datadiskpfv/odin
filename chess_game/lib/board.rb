@@ -69,25 +69,25 @@ class Board
 
   if piece.all_moves(from, @board).include? to_dest
     puts "Found a valid move"
-    if to_square.contains.nil?
-      to_square.contains = piece
-      from_square.contains = nil
-      if (piece.name.include? 'Pawn') && (piece.first_move == true)
-        piece.first_move = false
-      end
-      return true
-    else
-      to_square.contains = piece
-      from_square.contains = nil
+
+    if (piece.name.include? 'Pawn') && (piece.first_move == true)
+      piece.first_move = false
+    end
+
+    if !to_square.contains.nil?
       ## remove player piece
       puts "remove player piece"
       player.pieces.delete(piece.name)
-      return true
     end
+
+    to_square.contains = piece
+    from_square.contains = nil
   else
     puts "Not a valid move"
     return false
   end
+
+  return true
 
 	## get non_attach_moves from_coords (we will need to check nothing in in path)
 
