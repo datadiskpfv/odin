@@ -22,11 +22,20 @@ class Game
 
     @board = Board.new
     setup_board
-    @board.display_board
+    @board.display_board(@player1, @player2)
   end
 
   def start
-    #welcome()
+    #play = true
+    #while(play)
+      #welcome()
+      #puts "Player 1 turn: "
+      #move = gets.chomp
+      from = 'B8'
+      to = 'D8'
+      @board.move_piece(from, to)
+    @board.display_board(@player1, @player2)
+    #end
   end
 
   def setup_board
