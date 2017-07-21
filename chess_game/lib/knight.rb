@@ -28,15 +28,7 @@ class Knight <Chess_Piece
     #          [(destination[0] - 1), (destination[1] + 2)],
     #          [(destination[0] - 1), (destination[1] - 1)]]
 
-    n = @color == 'White' ? 1 : -1
     @moves = []
-
-    @moves << [(destination[0] + n), (destination[1])] if board[destination[0] + n][destination[1]].contains.nil?
-
-    if board[destination[0] + (n*2)][destination[1]].contains.nil?
-      puts "check: #{board[destination[0] + (n*2)][destination[1]].contains.nil?}"
-      @moves << [(destination[0] + (n*2)), (destination[1])] if @first_move
-    end
 
     @moves << [(destination[0] + n), (destination[1] - n)] if !board[destination[0] + n][destination[1] - n].contains.nil? && board[destination[0] + n][destination[1] - n].contains.color != @color
     @moves << [(destination[0] + n), (destination[1] + n)] if !board[destination[0] + n][destination[1] + n].contains.nil? && board[destination[0] + n][destination[1] + n].contains.color != @color

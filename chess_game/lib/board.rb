@@ -54,52 +54,40 @@ class Board
 
   def move_piece(from_coords, to_coords, player)
 
-  from = from_coords
-  to = to_coords
-  puts "From: #{from}  To: #{to}"
+    from = from_coords
+    to = to_coords
+    puts "From: #{from}  To: #{to}"
 
-  from_square = get_square(from_coords)
-  to_square = get_square(to_coords)
-  to_dest = get_coord_array(to_coords)
+    from_square = get_square(from_coords)
+    to_square = get_square(to_coords)
+    to_dest = get_coord_array(to_coords)
 
-  piece = get_piece(from)
-  puts "Piece: #{piece.name}"
+    piece = get_piece(from)
+    puts "Piece: #{piece.name}"
 
-  piece.all_moves(from, @board)
+    piece.all_moves(from, @board)
 
-  if piece.all_moves(from, @board).include? to_dest
-    puts "Found a valid move"
+    if piece.all_moves(from, @board).include? to_dest
+      puts "Found a valid move"
 
-    if (piece.name.include? 'Pawn') && (piece.first_move == true)
-      piece.first_move = false
+      if (piece.name.include? 'Pawn') && (piece.first_move == true)
+        piece.first_move = false
+      end
+
+      if !to_square.contains.nil?
+        ## remove player piece
+        puts "remove player piece"
+        player.pieces.delete(piece.name)
+      end
+
+      to_square.contains = piece
+      from_square.contains = nil
+    else
+      puts "Not a valid move"
+      return false
     end
 
-    if !to_square.contains.nil?
-      ## remove player piece
-      puts "remove player piece"
-      player.pieces.delete(piece.name)
-    end
-
-    to_square.contains = piece
-    from_square.contains = nil
-  else
-    puts "Not a valid move"
-    return false
-  end
-
-  return true
-
-	## get non_attach_moves from_coords (we will need to check nothing in in path)
-
-	## if square is empty move as long as it valid
-    ## check that path is clear (if jump is false)
-	
-	## if square has same color piece illegal move
-	
-	## get attack_moves from_coords
-	## if attack mode would if a different color is on the to_coords
-		## check that path is clear to attack (if jump is false)
-		## remove player piece	
+    return true
   end
 
   def square(coords)
