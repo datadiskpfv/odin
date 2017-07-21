@@ -52,7 +52,7 @@ class Board
     return v,h
   end
 
-  def move_piece(from_coords, to_coords)
+  def move_piece(from_coords, to_coords, player)
 
   from = from_coords
   to = to_coords
@@ -65,20 +65,25 @@ class Board
   piece = get_piece(from)
   puts "Piece: #{piece.name}"
 
-  if piece.all_moves(from).include? to_dest
-    puts "Found a valid move  #{piece.all_moves(from).include? to_dest}"
-    piece.all_moves(from).each do |move|
-      puts "Comparing #{move} to #{to_dest}"
-      if move == to_dest
-        puts "Valid Move: #{move}"
-        from_square.contains = nil
-        to_square.contains = piece
-        break
-      end
+  piece.all_moves(from, @board)
+
+  if piece.all_moves(from, @board).include? to_dest
+    puts "Found a valid move"
+    if to_square.contains.nil?
+      to_square.contains = piece
+      from_square.contains = nil
+      return true
+    else
+      to_square.contains = piece
+      from_square.contains = nil
+      ## remove player piece
+      puts "remove player piece"
+      player.pieces.delete(piece.name)
+      return true
     end
   else
     puts "Not a valid move"
-    exit 0
+    return false
   end
 
 	## get non_attach_moves from_coords (we will need to check nothing in in path)
