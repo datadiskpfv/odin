@@ -1,6 +1,6 @@
 class Chess_Piece
 
-  attr_accessor :name, :color, :image
+  attr_accessor :name, :color, :image, :first_move
 
   def get_coords_array(coords)
     v, h = coords.split('')

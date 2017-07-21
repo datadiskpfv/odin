@@ -72,6 +72,9 @@ class Board
     if to_square.contains.nil?
       to_square.contains = piece
       from_square.contains = nil
+      if (piece.name.include? 'Pawn') && (piece.first_move == true)
+        piece.first_move = false
+      end
       return true
     else
       to_square.contains = piece

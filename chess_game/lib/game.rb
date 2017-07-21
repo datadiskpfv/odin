@@ -38,12 +38,14 @@ class Game
       move = gets.chomp
       from, to = move.split('-')
 
-
       while !@board.move_piece(from, to, @player)
         puts "Try again"
         puts "#{@player.name} turn: "
         move = gets.chomp
         from, to = move.split('-')
+      end
+      if @player.pieces.length == 0
+        return @player.name
       end
       @player = @player.color == 'White' ? @player2 : @player1
     end
@@ -66,4 +68,5 @@ class Game
 end
 
 game = Game.new
-game.start
+winner = game.start
+puts "Congratulations #{winner} you have WON!!!!!!"

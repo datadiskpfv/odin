@@ -35,10 +35,6 @@ class Pawn < Chess_Piece
     return @moves
   end
 
-  def attack_move(from_coords)
-	## [[row-1, column+1], [row-1, column-1]]
-  end	
-
   def startup
     if @color == 'White'
       case @name
