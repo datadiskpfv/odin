@@ -67,6 +67,12 @@ class Board
 
     piece.all_moves(from, @board)
 
+    if ( player.color != piece.color )
+      puts "Player Color: #{player.color}   Piece Color: #{piece.color}"
+      @message = "You cannot move that piece wrong color, Try again"
+      return false
+    end
+
     if piece.all_moves(from, @board).include? to_dest
       puts "Found a valid move"
 
@@ -76,14 +82,14 @@ class Board
 
       if !to_square.contains.nil?
         ## remove player piece
-        puts "remove player piece"
+        @message = "remove player #{player.name} piece from board"
         player.pieces.delete(piece.name)
       end
 
       to_square.contains = piece
       from_square.contains = nil
     else
-      puts "Not a valid move"
+      @message = "Not a valid move, Try again"
       return false
     end
 

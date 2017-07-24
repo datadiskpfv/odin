@@ -34,13 +34,14 @@ class Game
     while(play)
       welcome()
       @board.display_board(@player1, @player2)
-      puts "#{@player.name} turn: "
+      puts "#{@player.name}\'s turn: "
       move = gets.chomp
       from, to = move.split('-')
 
       while !@board.move_piece(from, to, @player)
-        puts "Try again"
-        puts "#{@player.name} turn: "
+        @board.display_board(@player1, @player2)
+        #puts "Try again"
+        puts "#{@player.name}\'s turn: "
         move = gets.chomp
         from, to = move.split('-')
       end

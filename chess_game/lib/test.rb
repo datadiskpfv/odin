@@ -1,3 +1,10 @@
-image = "\u2654"
+@moves = []
+@moves2 = []
 
-puts image
+@moves << [[0,0],[1,0]]
+
+p @moves
+
+@moves << @moves2
+
+p @moves

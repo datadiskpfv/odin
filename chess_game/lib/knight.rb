@@ -17,7 +17,7 @@ class Knight <Chess_Piece
 
   def all_moves(from_coords, board)
     destination = get_coords_array(from_coords)
-    puts "Desination: #{destination}"
+    puts "From: #{destination}"
 
     #@moves = [[(destination[0] + 2), (destination[1] + 1)],
     #          [(destination[0] + 2), (destination[1] - 1)],
@@ -30,8 +30,14 @@ class Knight <Chess_Piece
 
     @moves = []
 
-    @moves << [(destination[0] + n), (destination[1] - n)] if !board[destination[0] + n][destination[1] - n].contains.nil? && board[destination[0] + n][destination[1] - n].contains.color != @color
-    @moves << [(destination[0] + n), (destination[1] + n)] if !board[destination[0] + n][destination[1] + n].contains.nil? && board[destination[0] + n][destination[1] + n].contains.color != @color
+    @moves << [(destination[0] + 2), (destination[1] + 1)] if board[destination[0] + 2][destination[1] + 1].contains.nil? || board[destination[0] + 2][destination[1] + 1].contains.color != @color
+    @moves << [(destination[0] + 2), (destination[1] - 1)] if board[destination[0] + 2][destination[1] - 1].contains.nil? || board[destination[0] + 2][destination[1] - 1].contains.color != @color
+    @moves << [(destination[0] - 2), (destination[1] + 1)] if board[destination[0] - 2][destination[1] + 1].contains.nil? || board[destination[0] - 2][destination[1] + 1].contains.color != @color
+    @moves << [(destination[0] - 2), (destination[1] - 1)] if board[destination[0] - 2][destination[1] - 1].contains.nil? || board[destination[0] - 2][destination[1] - 1].contains.color != @color
+    @moves << [(destination[0] + 1), (destination[1] + 2)] if board[destination[0] + 1][destination[1] + 2].contains.nil? || board[destination[0] + 1][destination[1] + 2].contains.color != @color
+    @moves << [(destination[0] + 1), (destination[1] - 2)] if board[destination[0] + 1][destination[1] - 2].contains.nil? || board[destination[0] + 1][destination[1] - 2].contains.color != @color
+    @moves << [(destination[0] - 1), (destination[1] + 2)] if board[destination[0] - 1][destination[1] + 2].contains.nil? || board[destination[0] - 1][destination[1] + 2].contains.color != @color
+    @moves << [(destination[0] - 1), (destination[1] - 1)] if board[destination[0] - 1][destination[1] - 1].contains.nil? || board[destination[0] - 1][destination[1] - 1].contains.color != @color
 
     puts "MOVES (before): #{@moves}"
 
