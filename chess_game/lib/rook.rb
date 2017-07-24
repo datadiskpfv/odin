@@ -30,9 +30,13 @@ class Rook < Chess_Piece
     #          [(destination[0] - 1), (destination[1] - 1)]]
 
     @moves = []
+    puts "Getting North Moves"
     north_moves(from_coords, board, @moves)
+    puts "Getting East Moves"
     east_moves(from_coords, board, @moves)
+    puts "Getting West Moves"
     west_moves(from_coords, board, @moves)
+    puts "Getting South Moves"
     south_moves(from_coords, board, @moves)
 
     puts "MOVES (before): #{@moves}"

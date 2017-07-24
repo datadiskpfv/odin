@@ -14,14 +14,16 @@ class Chess_Piece
     puts "From: #{destination}"
 
     n = 1
-
-    while n < 8
-       if board[destination[0] + n][destination[1]].contains.nil? || board[destination[0] + n][destination[1]].contains.color != @color
-         moves << [(destination[0] + n), (destination[1])]
-         n += 1
-       else
-         break
-       end
+    while destination[0] + n < 8
+      if board[destination[0] + n][destination[1]].contains.nil?
+        moves << [(destination[0] + n), (destination[1])]
+        n += 1
+      elsif board[destination[0] + n][destination[1]].contains.color != @color
+        moves << [(destination[0] + n), (destination[1])]
+        n = 8
+      else
+        break
+      end
     end
   end
 
@@ -30,11 +32,13 @@ class Chess_Piece
     puts "From: #{destination}"
 
     n = 1
-
-    while n < 8
-      if board[destination[0]][destination[1] + n].contains.nil? || board[destination[0]][destination[1] + n].contains.color != @color
+    while destination[1] + n < 8
+      if board[destination[0]][destination[1] + n].contains.nil?
         moves << [(destination[0]), (destination[1] + n)]
         n += 1
+      elsif board[destination[0]][destination[1] + n].contains.color != @color
+        moves << [(destination[0]), (destination[1] + n)]
+        n = 8
       else
         break
       end
@@ -46,11 +50,13 @@ class Chess_Piece
     puts "From: #{destination}"
 
     n = 1
-
-    while n < 8
-      if board[destination[0]][destination[1] - n].contains.nil? || board[destination[0]][destination[1] - n].contains.color != @color
+    while destination[1] - n >= 0
+      if board[destination[0]][destination[1] - n].contains.nil?
         moves << [(destination[0]), (destination[1] - n)]
         n += 1
+      elsif board[destination[0]][destination[1] - n].contains.color != @color
+        moves << [(destination[0]), (destination[1] - n)]
+        n = 8
       else
         break
       end
@@ -62,11 +68,13 @@ class Chess_Piece
     puts "From: #{destination}"
 
     n = 1
-
-    while n < 8
-      if board[destination[0] - n][destination[1]].contains.nil? || board[destination[0] - n][destination[1]].contains.color != @color
+    while destination[0] - n >= 0
+      if board[destination[0] - n][destination[1]].contains.nil?
         moves << [(destination[0] - n), (destination[1])]
         n += 1
+      elsif board[destination[0] - n][destination[1]].contains.color != @color
+        moves << [(destination[0] - n), (destination[1])]
+        n = 8
       else
         break
       end
