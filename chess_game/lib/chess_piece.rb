@@ -20,7 +20,7 @@ class Chess_Piece
         n += 1
       elsif board[destination[0] + n][destination[1]].contains.color != @color
         moves << [(destination[0] + n), (destination[1])]
-        n = 8
+        break
       else
         break
       end
@@ -38,7 +38,7 @@ class Chess_Piece
         n += 1
       elsif board[destination[0]][destination[1] + n].contains.color != @color
         moves << [(destination[0]), (destination[1] + n)]
-        n = 8
+        break
       else
         break
       end
@@ -56,7 +56,7 @@ class Chess_Piece
         n += 1
       elsif board[destination[0]][destination[1] - n].contains.color != @color
         moves << [(destination[0]), (destination[1] - n)]
-        n = 8
+        break
       else
         break
       end
@@ -74,7 +74,7 @@ class Chess_Piece
         n += 1
       elsif board[destination[0] - n][destination[1]].contains.color != @color
         moves << [(destination[0] - n), (destination[1])]
-        n = 8
+        break
       else
         break
       end
