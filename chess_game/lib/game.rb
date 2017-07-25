@@ -9,7 +9,7 @@ require_relative 'Pawn'
 
 class Game
 
-  attr_accessor :player
+  attr_accessor :player, :oplayer
 
   def initialize
     #puts 'Enter the first players name who will be white: '
@@ -23,6 +23,7 @@ class Game
     @player2 = Player.new('Lorraine', 'Black')
 
     @player = @player1
+    @oplayer = @player2
 
     @board = Board.new
     setup_board
@@ -38,17 +39,23 @@ class Game
       move = gets.chomp
       from, to = move.split('-')
 
-      while !@board.move_piece(from, to, @player)
+      while !@board.move_piece(from, to, @player, @oplayer)
         @board.display_board(@player1, @player2)
         #puts "Try again"
         puts "#{@player.name}\'s turn: "
         move = gets.chomp
         from, to = move.split('-')
       end
+
+      @board.check(@player, @oplayer)
+
       if @player.pieces.length == 0
+        return @player.name
+      elsif @board.winner == true
         return @player.name
       end
       @player = @player.color == 'White' ? @player2 : @player1
+      @oplayer = @oplayer.color == 'White' ? @player1 : @player2
     end
   end
 

@@ -1,9 +1,10 @@
 require_relative 'square'
 
 class Board
-  attr_accessor :board, :message
+  attr_accessor :board, :message, :winner
 
   def initialize
+    winner = false
     cols = 8
     rows = 8
     @board = Array.new
@@ -32,8 +33,8 @@ class Board
     puts "   -----------------------------------------------"
     puts " A | %2s | %2s | %2s | %2s | %2s | %2s | %2s | %2s |" % [square('A1'), square('A2'), square('A3'), square('A4'), square('A5'), square('A6'), square('A7'), square('A8')]
     puts "   -----------------------------------------------"
-    puts "Player One pieces: #{player1.pieces.length}"
-    puts "Player Two pieces: #{player2.pieces.length}\n"
+    puts "Player #{player1.name} pieces: #{player1.pieces.length}"
+    puts "Player #{player2.name} pieces: #{player2.pieces.length}\n"
     puts "#{@message}"
     @message = ''
   end
@@ -42,6 +43,7 @@ class Board
     v, h = convert_coords(coords)
     square = board[v][h]
     square.contains = piece
+    piece.position = [v,h]
     return "board: [#{v}][#{h}]"
   end
 
@@ -52,7 +54,7 @@ class Board
     return v,h
   end
 
-  def move_piece(from_coords, to_coords, player)
+  def move_piece(from_coords, to_coords, player, oplayer)
 
     from = from_coords
     to = to_coords
@@ -63,6 +65,7 @@ class Board
     to_dest = get_coord_array(to_coords)
 
     piece = get_piece(from)
+    target_piece = get_piece(to)
     puts "Piece: #{piece.name}"
 
     piece.all_moves(from, @board)
@@ -82,8 +85,11 @@ class Board
 
       if !to_square.contains.nil?
         ## remove player piece
-        @message = "remove player #{player.name} piece from board"
-        player.pieces.delete(piece.name)
+        @message = "remove player #{oplayer.name} piece from board #{target_piece.name}"
+        oplayer.pieces.delete(piece.name)
+        if target_piece.name == 'King'
+          @winner = true
+        end
       end
 
       to_square.contains = piece
@@ -127,4 +133,9 @@ class Board
     v = v.ord - 65
     return [v,h]
   end
+
+  def check(player, oplayer)
+    puts "OPlayer kings position: #{oplayer.pieces['King'].position}"
+  end
+
 end
