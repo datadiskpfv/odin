@@ -92,6 +92,7 @@ class Board
         end
       end
 
+      piece.position = get_coords_array(to)
       to_square.contains = piece
       from_square.contains = nil
     else
@@ -138,4 +139,6 @@ class Board
     puts "OPlayer kings position: #{oplayer.pieces['King'].position}"
   end
 
+  def check_mate(player, oplayer)
+  end
 end
