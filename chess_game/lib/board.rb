@@ -92,7 +92,7 @@ class Board
         end
       end
 
-      piece.position = get_coords_array(to)
+      piece.position = get_coord_array(to)
       to_square.contains = piece
       from_square.contains = nil
     else
