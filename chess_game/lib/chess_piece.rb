@@ -104,7 +104,7 @@ class Chess_Piece
     puts "From: #{destination}"
 
     n = 1
-    while destination[1] + n < 8 && destination[0] + n > 0
+    while destination[1] + n < 8 && destination[0] + n >= 0
       if board[destination[0] - n][destination[1] + n].contains.nil?
         moves << [(destination[0] - n), (destination[1] + n)]
         n += 1
@@ -122,7 +122,7 @@ class Chess_Piece
     puts "From: #{destination}"
 
     n = 1
-    while destination[0] - n < 8 && destination[1] - n > 0
+    while destination[0] - n >= 0 && destination[1] - n >= 0
       if board[destination[0] - n][destination[1] - n].contains.nil?
         moves << [(destination[0] - n), (destination[1] - n)]
         n += 1
@@ -135,17 +135,17 @@ class Chess_Piece
     end
   end
 
-  def south_west_moves(from_coords, board, moves)
+  def north_west_moves(from_coords, board, moves)
     destination = get_coords_array(from_coords)
     puts "From: #{destination}"
 
     n = 1
-    while destination[0] - n < 8 && destination[1] - n > 0
-      if board[destination[0] - n][destination[1] - n].contains.nil?
-        moves << [(destination[0] - n), (destination[1] - n)]
+    while destination[0] + n < 8 && destination[1] - n >= 0
+      if board[destination[0] + n][destination[1] - n].contains.nil?
+        moves << [(destination[0] + n), (destination[1] - n)]
         n += 1
-      elsif board[destination[0] - n][destination[1] - n].contains.color != @color
-        moves << [(destination[0] - n), (destination[1] - n)]
+      elsif board[destination[0] + n][destination[1] - n].contains.color != @color
+        moves << [(destination[0] + n), (destination[1] - n)]
         break
       else
         break
