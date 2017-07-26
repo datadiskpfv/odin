@@ -16,15 +16,24 @@ class Pawn < Chess_Piece
     n = @color == 'White' ? 1 : -1
     @moves = []
 
-    @moves << [(destination[0] + n), (destination[1])] if board[destination[0] + n][destination[1]].contains.nil?
-
-    if board[destination[0] + (n*2)][destination[1]].contains.nil?
-      puts "check: #{board[destination[0] + (n*2)][destination[1]].contains.nil?}"
-      @moves << [(destination[0] + (n*2)), (destination[1])] if @first_move
+    if destination[0] + n < 8
+      @moves << [(destination[0] + n), (destination[1])] if board[destination[0] + n][destination[1]].contains.nil?
     end
 
-    @moves << [(destination[0] + n), (destination[1] - n)] if !board[destination[0] + n][destination[1] - n].contains.nil? && board[destination[0] + n][destination[1] - n].contains.color != @color
-    @moves << [(destination[0] + n), (destination[1] + n)] if !board[destination[0] + n][destination[1] + n].contains.nil? && board[destination[0] + n][destination[1] + n].contains.color != @color
+    if destination[0] + (n*2) < 8
+      if board[destination[0] + (n*2)][destination[1]].contains.nil?
+        puts "check: #{board[destination[0] + (n*2)][destination[1]].contains.nil?}"
+        @moves << [(destination[0] + (n*2)), (destination[1])] if @first_move
+      end
+    end
+
+    if destination[0] + n < 8 && destination[1] - n >= 0
+      @moves << [(destination[0] + n), (destination[1] - n)] if !board[destination[0] + n][destination[1] - n].contains.nil? && board[destination[0] + n][destination[1] - n].contains.color != @color
+    end
+
+    if destination[0] + n < 8 && destination[1] + n < 8
+      @moves << [(destination[0] + n), (destination[1] + n)] if !board[destination[0] + n][destination[1] + n].contains.nil? && board[destination[0] + n][destination[1] + n].contains.color != @color
+    end
 
     puts "MOVES (before): #{@moves}"
 

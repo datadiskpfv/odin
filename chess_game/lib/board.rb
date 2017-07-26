@@ -43,7 +43,7 @@ class Board
     v, h = convert_coords(coords)
     square = board[v][h]
     square.contains = piece
-    piece.position = [v,h]
+    piece.position = coords
     return "board: [#{v}][#{h}]"
   end
 
@@ -92,9 +92,12 @@ class Board
         end
       end
 
-      piece.position = get_coord_array(to)
+      piece.position = to
       to_square.contains = piece
       from_square.contains = nil
+
+      ## check to see if opponents king is in check or check mate
+      check(player, oplayer)
     else
       @message = "Not a valid move, Try again"
       return false
@@ -136,7 +139,24 @@ class Board
   end
 
   def check(player, oplayer)
-    puts "OPlayer kings position: #{oplayer.pieces['King'].position}"
+    oplayer_position = oplayer.pieces['King'].position
+
+    @player_moves = []
+    player.pieces.values.each do |piece|
+      #puts "PLAYER: #{piece.name} - #{piece.position}"
+      @player_moves << piece.all_moves(piece.position, @board)
+
+      puts "OPlayer kings position: #{get_coord_array(oplayer_position)}"
+      puts "All possible moves #{@player_moves.flatten(1)}"
+
+      puts "#{@player_moves.flatten(1).any? { |e| e == get_coord_array(oplayer_position) }}"
+
+      if @player_moves.flatten(1).any? { |e| e == get_coord_array(oplayer_position) }
+        puts "CHECK - YOU MUST MOVE KING"
+      else
+        puts "ALL OK"
+      end
+    end
   end
 
   def check_mate(player, oplayer)

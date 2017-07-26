@@ -47,8 +47,6 @@ class Game
         from, to = move.split('-')
       end
 
-      @board.check(@player, @oplayer)
-
       if @player.pieces.length == 0
         return @player.name
       elsif @board.winner == true

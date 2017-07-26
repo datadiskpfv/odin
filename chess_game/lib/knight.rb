@@ -30,15 +30,37 @@ class Knight <Chess_Piece
 
     @moves = []
 
-    @moves << [(destination[0] + 2), (destination[1] + 1)] if board[destination[0] + 2][destination[1] + 1].contains.nil? || board[destination[0] + 2][destination[1] + 1].contains.color != @color
-    @moves << [(destination[0] + 2), (destination[1] - 1)] if board[destination[0] + 2][destination[1] - 1].contains.nil? || board[destination[0] + 2][destination[1] - 1].contains.color != @color
-    @moves << [(destination[0] - 2), (destination[1] + 1)] if board[destination[0] - 2][destination[1] + 1].contains.nil? || board[destination[0] - 2][destination[1] + 1].contains.color != @color
-    @moves << [(destination[0] - 2), (destination[1] - 1)] if board[destination[0] - 2][destination[1] - 1].contains.nil? || board[destination[0] - 2][destination[1] - 1].contains.color != @color
-    @moves << [(destination[0] + 1), (destination[1] + 2)] if board[destination[0] + 1][destination[1] + 2].contains.nil? || board[destination[0] + 1][destination[1] + 2].contains.color != @color
-    @moves << [(destination[0] + 1), (destination[1] - 2)] if board[destination[0] + 1][destination[1] - 2].contains.nil? || board[destination[0] + 1][destination[1] - 2].contains.color != @color
-    @moves << [(destination[0] - 1), (destination[1] + 2)] if board[destination[0] - 1][destination[1] + 2].contains.nil? || board[destination[0] - 1][destination[1] + 2].contains.color != @color
-    @moves << [(destination[0] - 1), (destination[1] - 1)] if board[destination[0] - 1][destination[1] - 1].contains.nil? || board[destination[0] - 1][destination[1] - 1].contains.color != @color
+    if destination[0] + 2 < 8 && destination[1] + 1 < 8
+      @moves << [(destination[0] + 2), (destination[1] + 1)] if board[destination[0] + 2][destination[1] + 1].contains.nil? || board[destination[0] + 2][destination[1] + 1].contains.color != @color
+    end
 
+    if destination[0] + 2 < 8 && destination[1] - 1 >= 0
+      @moves << [(destination[0] + 2), (destination[1] - 1)] if board[destination[0] + 2][destination[1] - 1].contains.nil? || board[destination[0] + 2][destination[1] - 1].contains.color != @color
+    end
+
+    if destination[0] - 2 >= 0 && destination[1] + 1 < 8
+      @moves << [(destination[0] - 2), (destination[1] + 1)] if board[destination[0] - 2][destination[1] + 1].contains.nil? || board[destination[0] - 2][destination[1] + 1].contains.color != @color
+    end
+
+    if destination[0] - 2 >= 0 && destination[1] - 1 >= 0
+      @moves << [(destination[0] - 2), (destination[1] - 1)] if board[destination[0] - 2][destination[1] - 1].contains.nil? || board[destination[0] - 2][destination[1] - 1].contains.color != @color
+    end
+
+    if destination[0] + 1 < 8 && destination[1] + 2 < 8
+      @moves << [(destination[0] + 1), (destination[1] + 2)] if board[destination[0] + 1][destination[1] + 2].contains.nil? || board[destination[0] + 1][destination[1] + 2].contains.color != @color
+    end
+
+    if destination[0] + 1 < 8 && destination[1] - 2 >= 0
+      @moves << [(destination[0] + 1), (destination[1] - 2)] if board[destination[0] + 1][destination[1] - 2].contains.nil? || board[destination[0] + 1][destination[1] - 2].contains.color != @color
+    end
+
+    if destination[0] - 1 >= 0 && destination[1] + 2 < 8
+      @moves << [(destination[0] - 1), (destination[1] + 2)] if board[destination[0] - 1][destination[1] + 2].contains.nil? || board[destination[0] - 1][destination[1] + 2].contains.color != @color
+    end
+
+    if destination[0] - 1 >= 0 && destination[1] - 1 >= 0
+      @moves << [(destination[0] - 1), (destination[1] - 1)] if board[destination[0] - 1][destination[1] - 1].contains.nil? || board[destination[0] - 1][destination[1] - 1].contains.color != @color
+    end
     puts "MOVES (before): #{@moves}"
 
     @moves.reject! do |cell|
