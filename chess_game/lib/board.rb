@@ -96,8 +96,22 @@ class Board
       to_square.contains = piece
       from_square.contains = nil
 
+      puts "First CHECk: check"
+      if check(oplayer, player)
+        piece.position = from
+        to_square.contains = nil
+        from_square.contains = piece
+        @message = "You cannot move into a check position"
+        return false
+      end
+
       ## check to see if opponents king is in check or check mate
+      puts "Second CHECK: check"
       check(player, oplayer)
+      #check(oplayer, player)
+
+      puts "CHECK MATE: check"
+      check_mate(player, oplayer)
     else
       @message = "Not a valid move, Try again"
       return false
@@ -141,24 +155,41 @@ class Board
   def check(player, oplayer)
     oplayer_position = oplayer.pieces['King'].position
 
+    puts "OPlayer #{oplayer.name} kings position: #{get_coord_array(oplayer_position)}"
+
     @player_moves = []
     player.pieces.values.each do |piece|
-      #puts "PLAYER: #{piece.name} - #{piece.position}"
+      puts "PLAYER #{player.name}: #{piece.name} - #{piece.position}"
       @player_moves << piece.all_moves(piece.position, @board)
-
-      puts "OPlayer kings position: #{get_coord_array(oplayer_position)}"
-      puts "All possible moves #{@player_moves.flatten(1)}"
 
       puts "#{@player_moves.flatten(1).any? { |e| e == get_coord_array(oplayer_position) }}"
 
       if @player_moves.flatten(1).any? { |e| e == get_coord_array(oplayer_position) }
-        puts "CHECK - YOU MUST MOVE KING"
-      else
-        puts "ALL OK"
+        puts "CHECK"
+        @message = "CHECK #{oplayer.name} - YOU MUST MOVE KING\n"
+        return true
       end
     end
+    puts "All possible moves #{player.name} #{@player_moves.flatten(1)}"
+    return false
   end
 
   def check_mate(player, oplayer)
+    oplayer_position = oplayer.pieces['King'].position
+
+    @oplayer_moves = oplayer.pieces['King'].all_moves(oplayer_position, @board)
+
+    @player_moves = []
+    player.pieces.values.each do |piece|
+      @player_moves << piece.all_moves(piece.position, @board)
+    end
+
+    #puts "OPLAYER #{oplayer.name} MOVES (King): #{@oplayer_moves}"
+    #puts "PLAYER #{player.name} MOVES: #{@player_moves}"
+
+    if (@oplayer_moves - @player_moves.flatten(1)).size == 0
+      #puts "CHECK MATE #{oplayer.name}"
+      @winner = true
+    end
   end
 end

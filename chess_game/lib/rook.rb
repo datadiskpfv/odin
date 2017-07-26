@@ -18,7 +18,7 @@ class Rook < Chess_Piece
 
   def all_moves(from_coords, board)
     destination = get_coords_array(from_coords)
-    puts "From: #{destination}"
+    #puts "From: #{destination}"
 
     #@moves = [[(destination[0] + 2), (destination[1] + 1)],
     #          [(destination[0] + 2), (destination[1] - 1)],
@@ -30,20 +30,20 @@ class Rook < Chess_Piece
     #          [(destination[0] - 1), (destination[1] - 1)]]
 
     @moves = []
-    puts "Getting North Moves"
+    #puts "Getting North Moves"
     north_moves(from_coords, board, @moves)
-    puts "Getting East Moves"
+    #puts "Getting East Moves"
     east_moves(from_coords, board, @moves)
-    puts "Getting West Moves"
+    #puts "Getting West Moves"
     west_moves(from_coords, board, @moves)
-    puts "Getting South Moves"
+    #puts "Getting South Moves"
     south_moves(from_coords, board, @moves)
 
-    puts "MOVES (before): #{@moves}"
+    #puts "MOVES (before): #{@moves}"
     @moves.reject! do |cell|
       cell.any? { |x| x < 0 } || cell.any? { |x| x > 7 }
     end
-    puts "MOVES (after): #{@moves}"
+    #puts "MOVES (after): #{@moves}"
     return @moves
   end
 end

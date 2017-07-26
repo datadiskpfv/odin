@@ -15,7 +15,7 @@ class King < Chess_Piece
 
   def all_moves(from_coords, board)
     destination = get_coords_array(from_coords)
-    puts "Desination: #{destination}"
+    #puts "Desination: #{destination}"
 
     n = 1
     @moves = []
@@ -52,12 +52,12 @@ class King < Chess_Piece
       @moves << [(destination[0] + n), (destination[1] - n)] if board[destination[0] + n][destination[1] - n].contains.nil? || board[destination[0] + n][destination[1] - n].contains.color != @color
     end
 
-    puts "MOVES (before): #{@moves}"
+    #puts "MOVES (before): #{@moves}"
 
     @moves.reject! do |cell|
       cell.any? { |x| x < 0 } || cell.any? { |x| x > 7 }
     end
-    puts "MOVES (after): #{@moves}"
+    #puts "MOVES (after): #{@moves}"
     return @moves
   end
 end

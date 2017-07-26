@@ -11,7 +11,7 @@ class Chess_Piece
 
   def north_moves(from_coords, board, moves)
     destination = get_coords_array(from_coords)
-    puts "From: #{destination}"
+    #puts "From: #{destination}"
 
     n = 1
     while destination[0] + n < 8
@@ -29,7 +29,7 @@ class Chess_Piece
 
   def east_moves(from_coords, board, moves)
     destination = get_coords_array(from_coords)
-    puts "From: #{destination}"
+    #puts "From: #{destination}"
 
     n = 1
     while destination[1] + n < 8
@@ -47,7 +47,7 @@ class Chess_Piece
 
   def west_moves(from_coords, board, moves)
     destination = get_coords_array(from_coords)
-    puts "From: #{destination}"
+    #puts "From: #{destination}"
 
     n = 1
     while destination[1] - n >= 0
@@ -65,7 +65,7 @@ class Chess_Piece
 
   def south_moves(from_coords, board, moves)
     destination = get_coords_array(from_coords)
-    puts "From: #{destination}"
+    #puts "From: #{destination}"
 
     n = 1
     while destination[0] - n >= 0
@@ -83,7 +83,7 @@ class Chess_Piece
 
   def north_east_moves(from_coords, board, moves)
     destination = get_coords_array(from_coords)
-    puts "From: #{destination}"
+    #puts "From: #{destination}"
 
     n = 1
     while destination[0] + n < 8 && destination[1] + n < 8
@@ -101,7 +101,7 @@ class Chess_Piece
 
   def south_east_moves(from_coords, board, moves)
     destination = get_coords_array(from_coords)
-    puts "From: #{destination}"
+    #puts "From: #{destination}"
 
     n = 1
     while destination[1] + n < 8 && destination[0] + n >= 0
@@ -119,7 +119,7 @@ class Chess_Piece
 
   def south_west_moves(from_coords, board, moves)
     destination = get_coords_array(from_coords)
-    puts "From: #{destination}"
+    #puts "From: #{destination}"
 
     n = 1
     while destination[0] - n >= 0 && destination[1] - n >= 0
@@ -137,7 +137,7 @@ class Chess_Piece
 
   def north_west_moves(from_coords, board, moves)
     destination = get_coords_array(from_coords)
-    puts "From: #{destination}"
+    #puts "From: #{destination}"
 
     n = 1
     while destination[0] + n < 8 && destination[1] - n >= 0

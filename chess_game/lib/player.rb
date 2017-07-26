@@ -15,7 +15,7 @@ class Player
               'Bishop2' => Bishop.new(color, 'Bishop2'),
               'Pawn1'   => Pawn.new(color, 'Pawn1'),
               'Pawn2'   => Pawn.new(color, 'Pawn2'),
-              #'Pawn3'   => Pawn.new(color, 'Pawn3'),
+              'Pawn3'   => Pawn.new(color, 'Pawn3'),
               #'Pawn4'   => Pawn.new(color, 'Pawn4'),
               #'Pawn5'   => Pawn.new(color, 'Pawn5'),
               'Pawn6'   => Pawn.new(color, 'Pawn6'),

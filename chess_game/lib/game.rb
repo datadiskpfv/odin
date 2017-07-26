@@ -52,8 +52,14 @@ class Game
       elsif @board.winner == true
         return @player.name
       end
-      @player = @player.color == 'White' ? @player2 : @player1
-      @oplayer = @oplayer.color == 'White' ? @player1 : @player2
+      if @player.color == 'White'
+        @player = @player2
+        @oplayer = @player1
+      else
+        @player = @player1
+        @oplayer = @player2
+      end
+
     end
   end
 

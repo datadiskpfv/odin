@@ -11,23 +11,23 @@ class Pawn < Chess_Piece
 
   def all_moves(from_coords, board)
     destination = get_coords_array(from_coords)
-    puts "Desination: #{destination}"
+    #puts "Desination: #{destination}"
 
     n = @color == 'White' ? 1 : -1
     @moves = []
 
-    if destination[0] + n < 8
+    if destination[0] + n < 8 && destination[0] + n >= 0
       @moves << [(destination[0] + n), (destination[1])] if board[destination[0] + n][destination[1]].contains.nil?
     end
 
-    if destination[0] + (n*2) < 8
+    if destination[0] + (n*2) < 8 && destination[0] + n >= 0
       if board[destination[0] + (n*2)][destination[1]].contains.nil?
-        puts "check: #{board[destination[0] + (n*2)][destination[1]].contains.nil?}"
+        #puts "check: #{board[destination[0] + (n*2)][destination[1]].contains.nil?}"
         @moves << [(destination[0] + (n*2)), (destination[1])] if @first_move
       end
     end
 
-    if destination[0] + n < 8 && destination[1] - n >= 0
+    if destination[0] + n < 8 && destination[0] + n >= 0 && destination[1] - n >= 0 && destination[1] - n < 8
       @moves << [(destination[0] + n), (destination[1] - n)] if !board[destination[0] + n][destination[1] - n].contains.nil? && board[destination[0] + n][destination[1] - n].contains.color != @color
     end
 
@@ -35,12 +35,12 @@ class Pawn < Chess_Piece
       @moves << [(destination[0] + n), (destination[1] + n)] if !board[destination[0] + n][destination[1] + n].contains.nil? && board[destination[0] + n][destination[1] + n].contains.color != @color
     end
 
-    puts "MOVES (before): #{@moves}"
+    #puts "MOVES (before): #{@moves}"
 
     @moves.reject! do |cell|
       cell.any? { |x| x < 0 } || cell.any? { |x| x > 7 }
     end
-    puts "MOVES (after): #{@moves}"
+    #puts "MOVES (after): #{@moves}"
     return @moves
   end
 
