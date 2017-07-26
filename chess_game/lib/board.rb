@@ -93,13 +93,14 @@ class Board
       end
 
       piece.position = to
+      original_to_square = to_square.contains
       to_square.contains = piece
       from_square.contains = nil
 
       puts "First CHECk: check"
       if check(oplayer, player)
         piece.position = from
-        to_square.contains = nil
+        to_square.contains = original_to_square
         from_square.contains = piece
         @message = "You cannot move into a check position"
         return false
