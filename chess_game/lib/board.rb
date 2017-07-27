@@ -70,9 +70,9 @@ class Board
 
     piece.all_moves(from, @board)
 
-    if ( player.color != piece.color )
+    if player.color != piece.color
       puts "Player Color: #{player.color}   Piece Color: #{piece.color}"
-      @message = "You cannot move that piece wrong color, Try again"
+      @message = 'You cannot move that piece wrong color, Try again'
       return false
     end
 
@@ -115,7 +115,7 @@ class Board
       check_mate(player, oplayer)
 
     else
-      @message = "Not a valid move, Try again"
+      @message = 'Not a valid move, Try again'
       return false
     end
 
