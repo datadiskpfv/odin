@@ -56,7 +56,7 @@ class Game
           puts "Move Bad, try again"
         end
       end
-
+      result = true
       from, to = move.split('-')
 
       while !@board.move_piece(from, to, @player, @oplayer)
@@ -80,7 +80,7 @@ class Game
             puts "Move Bad, try again"
           end
         end
-
+        result = true
         from, to = move.split('-')
       end
 
