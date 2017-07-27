@@ -108,10 +108,10 @@ class Board
       end
 
       ## check to see if opponents king is in check or check mate
-      puts "Second CHECK: check"
+      #puts "Second CHECK: check"
       check(player, oplayer)
 
-      puts "CHECK MATE: check"
+      #puts "CHECK MATE: check"
       check_mate(player, oplayer)
 
     else
@@ -156,13 +156,13 @@ class Board
   end
 
   def check(player, oplayer)
-    puts "player: #{player.name}  oplayer: #{oplayer.name}"
-    puts "pieces #{player.name}: #{player.pieces}"
-    puts "pieces #{oplayer.name}: #{oplayer.pieces}"
+    #puts "player: #{player.name}  oplayer: #{oplayer.name}"
+    #puts "pieces #{player.name}: #{player.pieces}"
+    #puts "pieces #{oplayer.name}: #{oplayer.pieces}"
 
     oplayer_position = oplayer.pieces['King'].position
 
-    puts "OPlayer #{oplayer.name} kings position: #{get_coord_array(oplayer_position)}"
+    #puts "OPlayer #{oplayer.name} kings position: #{get_coord_array(oplayer_position)}"
 
     @player_moves = []
     player.pieces.values.each do |piece|
@@ -177,7 +177,7 @@ class Board
         return true
       end
     end
-    puts "All possible moves #{player.name} #{@player_moves.flatten(1)}"
+    #puts "All possible moves #{player.name} #{@player_moves.flatten(1)}"
     return false
   end
 
@@ -194,7 +194,9 @@ class Board
     #puts "OPLAYER #{oplayer.name} MOVES (King): #{@oplayer_moves}"
     #puts "PLAYER #{player.name} MOVES: #{@player_moves}"
 
-    if (@oplayer_moves - @player_moves.flatten(1)).size == 0
+    #puts "KING #{oplayer.name} position: #{get_coord_array(oplayer.pieces['King'].position)}"
+
+    if ((@oplayer_moves - @player_moves.flatten(1)).size == 0) && (@player_moves.flatten(1).include? get_coord_array(oplayer.pieces['King'].position))
       #puts "CHECK MATE #{oplayer.name}"
       @winner = true
     end

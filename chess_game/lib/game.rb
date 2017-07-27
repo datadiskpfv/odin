@@ -35,21 +35,60 @@ class Game
     while(play)
       welcome()
       @board.display_board(@player1, @player2)
-      puts "#{@player.name}\'s turn: "
-      move = gets.chomp
+
+      result = true
+      move = ''
+
+      while result
+        puts "Enter your move #{@player.name} (A1-A8)-(H1-H8):  "
+        move = gets.chomp
+
+        if move =~ /[A-H][1-8]-[A-H][1-8]/
+
+          pos1, pos2 = move.split(/-/)
+          if pos1 == pos2
+            puts "The same positions were used, try again"
+          else
+            #puts "Move ok"
+            result = false
+          end
+        else
+          puts "Move Bad, try again"
+        end
+      end
+
       from, to = move.split('-')
 
       while !@board.move_piece(from, to, @player, @oplayer)
         @board.display_board(@player1, @player2)
-        #puts "Try again"
-        puts "#{@player.name}\'s turn: "
-        move = gets.chomp
+
+
+        while result
+          puts "Enter your move #{@player.name} (A1-A8)-(H1-H8):  "
+          move = gets.chomp
+
+          if move =~ /[A-H][1-8]-[A-H][1-8]/
+
+            pos1, pos2 = move.split(/-/)
+            if pos1 == pos2
+              puts "The same positions were used, try again"
+            else
+              #puts "Move ok"
+              result = false
+            end
+          else
+            puts "Move Bad, try again"
+          end
+        end
+
         from, to = move.split('-')
       end
 
       if @player.pieces.length == 0
+        puts "#{@player.name} has no more pieces"
         return @player.name
       elsif @board.winner == true
+        puts "board winner is true"
         return @player.name
       end
       if @player.color == 'White'
