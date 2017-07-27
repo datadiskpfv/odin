@@ -85,22 +85,23 @@ class Board
 
       if !to_square.contains.nil?
         ## remove player piece
+        puts "remove player #{oplayer.name} piece from board #{target_piece.name} position #{target_piece.position}"
         @message = "remove player #{oplayer.name} piece from board #{target_piece.name}"
-        oplayer.pieces.delete(piece.name)
+        oplayer.pieces.delete(target_piece.name)
         if target_piece.name == 'King'
           @winner = true
         end
       end
 
       piece.position = to
-      original_to_square = to_square.contains
+      #original_to_square = to_square.contains
       to_square.contains = piece
       from_square.contains = nil
 
       puts "First CHECk: check"
       if check(oplayer, player)
         piece.position = from
-        to_square.contains = original_to_square
+        #to_square.contains = original_to_square
         from_square.contains = piece
         @message = "You cannot move into a check position"
         return false
@@ -109,14 +110,15 @@ class Board
       ## check to see if opponents king is in check or check mate
       puts "Second CHECK: check"
       check(player, oplayer)
-      #check(oplayer, player)
 
       puts "CHECK MATE: check"
       check_mate(player, oplayer)
+
     else
       @message = "Not a valid move, Try again"
       return false
     end
+
 
     return true
   end
@@ -154,16 +156,20 @@ class Board
   end
 
   def check(player, oplayer)
+    puts "player: #{player.name}  oplayer: #{oplayer.name}"
+    puts "pieces #{player.name}: #{player.pieces}"
+    puts "pieces #{oplayer.name}: #{oplayer.pieces}"
+
     oplayer_position = oplayer.pieces['King'].position
 
     puts "OPlayer #{oplayer.name} kings position: #{get_coord_array(oplayer_position)}"
 
     @player_moves = []
     player.pieces.values.each do |piece|
-      puts "PLAYER #{player.name}: #{piece.name} - #{piece.position}"
+      #puts "PLAYER #{player.name}: #{piece.name} - #{piece.position}"
       @player_moves << piece.all_moves(piece.position, @board)
 
-      puts "#{@player_moves.flatten(1).any? { |e| e == get_coord_array(oplayer_position) }}"
+      #puts "#{@player_moves.flatten(1).any? { |e| e == get_coord_array(oplayer_position) }}"
 
       if @player_moves.flatten(1).any? { |e| e == get_coord_array(oplayer_position) }
         puts "CHECK"
