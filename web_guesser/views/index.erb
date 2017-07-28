@@ -1,0 +1,21 @@
+<html>
+<head></head>
+<body>
+<p>
+
+  <% if message.include? 'WINNER' %>
+    The SECRET NUMBER was <%= number %>
+      <br><%= message %>
+  <% else %>
+    The SECRET NUMBER is X <%= number %>
+      <br><%= message %>
+  <% end %>
+</p>
+
+<form>
+  <input type='text' name='guess' />
+  <input type='submit' value='Guess!' />
+</form>
+
+</body>
+</html>

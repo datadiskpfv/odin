@@ -10,11 +10,15 @@
       <excludeFolder url="file://$MODULE_DIR$/connect_four-master/.bundle" />
       <excludeFolder url="file://$MODULE_DIR$/e_methods/.bundle" />
       <excludeFolder url="file://$MODULE_DIR$/rspec/.bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/sinatra/.bundle" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="bundler (v1.14.5, ruby-2.3.3-p222) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="io-console (v0.4.5, ruby-2.3.3-p222) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rack (v2.0.3, ruby-2.3.3-p222) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rspec (v3.5.0, ruby-2.3.3-p222) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="sinatra (v2.0.0, ruby-2.3.3-p222) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="sinatra-contrib (v2.0.0, ruby-2.3.3-p222) [gem]" level="application" />
   </component>
 </module>
